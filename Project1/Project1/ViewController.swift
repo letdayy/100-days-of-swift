@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UITableViewController {
+    @IBOutlet var imageView: UITableView!
     
     var pictures = [String]()
 
