@@ -9,12 +9,17 @@ import UIKit
 
 class ViewController: UITableViewController {
     @IBOutlet weak var imageView: UIImageView!
+    
+    
 
     
     var pictures = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Storm Viewer"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
