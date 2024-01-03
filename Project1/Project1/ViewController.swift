@@ -45,10 +45,12 @@ class ViewController: UITableViewController {
         return cell
     }
     
-    //código para abrir a imagem selecionada
+    //código para abrir a imagem selecionada, exibir o index da imagem e o número total de imagens
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictures[indexPath.row]
+            vc.selectedImageIndex = indexPath.row + 1
+            vc.totalImages = pictures.count
             
             navigationController?.pushViewController(vc, animated: true)
         }
