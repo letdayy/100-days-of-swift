@@ -11,8 +11,6 @@ class ViewController: UITableViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     
-
-    
     var pictures = [String]()
 
     override func viewDidLoad() {
@@ -28,6 +26,8 @@ class ViewController: UITableViewController {
         for item in items {
         if item.hasPrefix("nssl") {
             pictures.append(item)
+            
+            pictures.sort()
             }
         }
     }
@@ -36,12 +36,16 @@ class ViewController: UITableViewController {
         return pictures.count
     }
 
+    //código para exibir os nomes das imagens na tela principal
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         cell.textLabel?.text = pictures[indexPath.row]
+        
         return cell
     }
     
+    //código para abrir a imagem selecionada
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictures[indexPath.row]
