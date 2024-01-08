@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         button3.setImage(UIImage(named: countries[2]), for: .normal)
         
         
-        title = countries[correctAwnser].uppercased()
+        title = countries[correctAwnser].uppercased() + ", Your score is \(score)"
      
     }
     
@@ -65,20 +65,28 @@ class ViewController: UIViewController {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
+        var ac: UIAlertController
+        
         
         if sender.tag == correctAwnser {
             title = "Correct!"
             score += 1
+            
+            ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
         } else {
             title = "Wrong :c"
-            score -= 1
+            //score -= 1
+            
+            ac = UIAlertController(title: title, message: "That’s the flag of \(countries[sender.tag].uppercased())", preferredStyle: .alert)
         }
         
-        let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+        
         
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         
         present(ac, animated: true)
     }
+    
+    
 }
 
