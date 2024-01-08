@@ -44,9 +44,7 @@ class ViewController: UIViewController {
         //adicionando os nomes no array
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
-        
         askQuestion()
-        
     }
 
     func askQuestion(action: UIAlertAction! = nil) {
