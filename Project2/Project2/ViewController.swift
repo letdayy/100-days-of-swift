@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var countries = [String]()
     var score = 0
     var correctAwnser = 0
+    var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,14 @@ class ViewController: UIViewController {
         //adicionando os nomes no array
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
+        
         askQuestion()
+        
     }
 
     func askQuestion(action: UIAlertAction! = nil) {
+        let result: UIAlertController
+        
         countries.shuffle()
         
         correctAwnser = Int.random(in: 0...2)
@@ -58,6 +63,16 @@ class ViewController: UIViewController {
         
         
         title = countries[correctAwnser].uppercased() + ", Your score is \(score)"
+        
+        //código para mostrar o resultado final
+        count += 1
+        
+        if count > 10 {
+            result = UIAlertController(title: "Congratulations! You completed the challenge", message: "Final score: \(score)", preferredStyle: .alert)
+            present(result, animated: true)
+            
+        }
+        
      
     }
     
@@ -75,16 +90,17 @@ class ViewController: UIViewController {
             ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
         } else {
             title = "Wrong :c"
-            //score -= 1
             
             ac = UIAlertController(title: title, message: "That’s the flag of \(countries[sender.tag].uppercased())", preferredStyle: .alert)
+            
         }
         
-        
-        
+    
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         
         present(ac, animated: true)
+        
+       
     }
     
     
