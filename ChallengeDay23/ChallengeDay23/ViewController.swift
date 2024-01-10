@@ -7,10 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
     
-    var images = [String]()
-    //let flags = ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
+    var pictures = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +20,24 @@ class ViewController: UIViewController {
         
         for item in items {
             if item.hasSuffix("2x.png") {
-                images.append(item)
+                let picturesName = item.replacingOccurrences(of: "@2x.png", with: "")
+                
+                pictures.append(picturesName)
             }
         }
         
-        print(images)
+        print(pictures)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        pictures.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
+        cell.textLabel?.text = pictures[indexPath.row]
+        
+        return cell
     }
     
 }
