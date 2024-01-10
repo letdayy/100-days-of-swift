@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     var selectedImageIndex: Int?
     var totalImages: Int?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,9 +52,13 @@ class DetailViewController: UIViewController {
             return
         }
         
+        
+        
+        let imageItemProvider = imageItemProvider(image: [image], name: [selectedImage])
+        
         //código que abre a barra de compartilhamento
         //importante colocar o image dentro do array de acitivityItems para funcionar
-        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [imageItemProvider], applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
     }
