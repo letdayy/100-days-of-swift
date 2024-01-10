@@ -7,13 +7,25 @@
 
 import UIKit
 
-class tableViewController: UITableViewController {
-
+class ViewController: UIViewController {
+    
+    var images = [String]()
+    //let flags = ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let fm = FileManager.default
+        let path = Bundle.main.resourcePath!
+        let items = try! fm.contentsOfDirectory(atPath: path)
+        
+        for item in items {
+            if item.hasSuffix("2x.png") {
+                images.append(item)
+            }
+        }
+        
+        print(images)
     }
-
-
+    
 }
-
