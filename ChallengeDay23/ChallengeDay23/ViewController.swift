@@ -40,4 +40,13 @@ class ViewController: UITableViewController {
         return cell
     }
     
+    //código para abrir a imagem na tela de detalhes
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            vc.selectedImage = pictures[indexPath.row]
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }

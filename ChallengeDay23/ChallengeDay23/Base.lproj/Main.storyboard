@@ -67,6 +67,9 @@
                             <constraint firstItem="YM0-4I-hj3" firstAttribute="centerX" secondItem="Y8k-pg-5H5" secondAttribute="centerX" id="zH0-pq-TF8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="YM0-4I-hj3" id="nKY-Ov-lmy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ypC-Oc-ZRV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
