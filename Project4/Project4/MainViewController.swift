@@ -28,8 +28,9 @@ class MainViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ViewController" as ViewController)
+        let vc = storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
         vc.websites = websites
+        vc.currentWebsite = indexPath.row
         navigationController?.pushViewController(vc, animated: true)
     }
     

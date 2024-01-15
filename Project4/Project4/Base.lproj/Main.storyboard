@@ -37,10 +37,10 @@
             </objects>
             <point key="canvasLocation" x="1293.8931297709923" y="-18.30985915492958"/>
         </scene>
-        <!--View Controller-->
+        <!--Web View Controller-->
         <scene sceneID="2BT-JJ-w8u">
             <objects>
-                <viewController id="Dbl-tC-nze" customClass="ViewController" customModule="Project4" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" id="Dbl-tC-nze" customClass="WebViewController" customModule="Project4" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H5D-h3-wVz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

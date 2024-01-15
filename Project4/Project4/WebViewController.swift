@@ -9,13 +9,15 @@ import UIKit
 import WebKit
 
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class WebViewController: UIViewController, WKNavigationDelegate {
     //forçar o desempacotamento de WebView
     var webView: WKWebView!
     //propriedade da barra de progresso
     var progressView: UIProgressView!
     //array de sites vazio
     var websites: [String]!
+    
+    var currentWebsite: Int!
     
     override func loadView() {
         webView = WKWebView()
@@ -26,6 +28,12 @@ class ViewController: UIViewController, WKNavigationDelegate {
     //função principal
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard websites != nil && currentWebsite != nil else {
+            print("error")
+            navigationController?.popViewController(animated: true)
+            return
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
         
@@ -49,7 +57,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         //adicionando o observador para saber o carregamento da página na barra de progresso
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         
-        let url = URL(string: "https://" + websites[0])!
+        let url = URL(string: "https://" + websites[currentWebsite])!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
     }
