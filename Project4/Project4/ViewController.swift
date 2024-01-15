@@ -14,8 +14,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     var webView: WKWebView!
     //propriedade da barra de progresso
     var progressView: UIProgressView!
-    //array de sites
-    var websites = ["apple.com", "hackingwithswift.com", "github.com", "google.com"]
+    //array de sites vazio
+    var websites: [String]!
     
     override func loadView() {
         webView = WKWebView()
@@ -33,7 +33,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         //ícone de recarregar página
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
-        
         //botões do desafio
         let back = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(goBack))
         let foward = UIBarButtonItem(title: "Avançar", style: .plain, target: self, action: #selector(goForward))
