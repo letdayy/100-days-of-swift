@@ -15,7 +15,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     //propriedade da barra de progresso
     var progressView: UIProgressView!
     //array de sites
-    var websites = ["apple.com", "hackingwithswift.com", "google.com"]
+    var websites = ["apple.com", "hackingwithswift.com", "github.com", "google.com"]
     
     override func loadView() {
         webView = WKWebView()
@@ -34,12 +34,17 @@ class ViewController: UIViewController, WKNavigationDelegate {
         //ícone de recarregar página
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
         
+        //botões do desafio
+        let back = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(goBack))
+        let foward = UIBarButtonItem(title: "Avançar", style: .plain, target: self, action: #selector(goForward))
+        
+                
         //código da barra de progresso
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.sizeToFit()
         let progressButton = UIBarButtonItem(customView: progressView)
         
-        toolbarItems = [progressButton, spacer, refresh]
+        toolbarItems = [back, progressButton, spacer, refresh, foward]
         navigationController?.isToolbarHidden = false
         
         //adicionando o observador para saber o carregamento da página na barra de progresso
@@ -48,6 +53,20 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let url = URL(string: "https://" + websites[0])!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
+    }
+    
+    //funçoes do desafio: voltar
+    @objc func goBack() {
+        if webView.canGoBack {
+            webView.goBack()
+        }
+    }
+    
+    //funçoes do desafio: avançar
+    @objc func goForward() {
+        if webView.canGoForward {
+            webView.goForward()
+        }
     }
 
     @objc func openTapped() {
