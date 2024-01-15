@@ -15,7 +15,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     //propriedade da barra de progresso
     var progressView: UIProgressView!
     //array de sites
-    var websites = ["apple.com", "hackingwithswift.com"]
+    var websites = ["apple.com", "hackingwithswift.com", "google.com"]
     
     override func loadView() {
         webView = WKWebView()
@@ -81,7 +81,12 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         if let host = url?.host {
             for website in websites {
-                if host.contains(website) {
+                if host.contains("google.com") {
+                    showAlertBlockAcess()
+                    decisionHandler(.cancel)
+                    return
+                    
+                } else if host.contains(website) {
                     decisionHandler(.allow)
                     return
                 }
@@ -90,6 +95,14 @@ class ViewController: UIViewController, WKNavigationDelegate {
         decisionHandler(.cancel)
     }
     
+    
+    //desafio alerta de site bloqueado
+    func showAlertBlockAcess() {
+        print("funcao funcionando")
+        let alert = UIAlertController(title: "Acesso bloqueado", message: "Não é possível acessar esse site ", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 
 }
 
