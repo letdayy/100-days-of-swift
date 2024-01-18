@@ -65,6 +65,9 @@ class ViewController: UITableViewController {
     func submit(_ answer: String) {
         let lowerAwnser = answer.lowercased()
         
+        let errorTitle: String
+        let errorMessage: String
+        
         if isPossible(word: lowerAwnser) {
             if isOriginal(word: lowerAwnser) {
                 if isReal(word: lowerAwnser) {
@@ -72,9 +75,25 @@ class ViewController: UITableViewController {
                     
                     let indexPath = IndexPath(row: 0, section: 0)
                     tableView.insertRows(at: [indexPath], with: .automatic)
+                    
+                    return
+                } else {
+                    errorTitle = "It's not a real word"
+                    errorMessage = "Sorry, but i can`t use that word!"
                 }
+            } else {
+                errorTitle = "Word used already"
+                errorMessage = "You alredy put that word, try another one!"
             }
+        } else {
+            guard let title = title?.lowercased() else { return }
+            errorTitle = "Word not possible"
+            errorMessage = "You can spell that word from \(title)"
         }
+        
+        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
     
     func isPossible(word: String) -> Bool {
