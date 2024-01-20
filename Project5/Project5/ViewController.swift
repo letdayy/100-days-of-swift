@@ -67,9 +67,6 @@ class ViewController: UITableViewController {
     func submit(_ answer: String) {
         let lowerAnswer = answer.lowercased()
         
-        let errorTitle: String
-        let errorMessage: String
-        
         if isPossible(word: lowerAnswer) {
             if isOriginal(word: lowerAnswer) {
                 if isReal(word: lowerAnswer) {
@@ -80,22 +77,15 @@ class ViewController: UITableViewController {
                     
                     return
                 } else {
-                    errorTitle = "It's not a real word"
-                    errorMessage = "Sorry, but i can`t use that word!"
+                    showErrorMessage(errorTitle: "It's not a real word", errorMessage: "Sorry, but i can`t use that word!")
                 }
             } else {
-                errorTitle = "Word used already"
-                errorMessage = "You alredy put that word, try another one!"
+                showErrorMessage(errorTitle: "Word used already", errorMessage: "You alredy put that word, try another one!")
             }
         } else {
             guard let title = title?.lowercased() else { return }
-            errorTitle = "Word not possible"
-            errorMessage = "You can spell that word from \(title)"
+            showErrorMessage(errorTitle: "Word not possible", errorMessage: "You can spell that word from \(title)")
         }
-        
-        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
     }
     
     func isPossible(word: String) -> Bool {
@@ -124,22 +114,24 @@ class ViewController: UITableViewController {
         
         
         if word.count < 3 {
-            let ac = UIAlertController(title: "Ops!", message: "Sorry, but \(word) has less than 3 characters. Try again.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+            showErrorMessage(errorTitle: "Ops!", errorMessage: "Sorry, but \(word) has less than 3 characters. Try again.")
             return false
         }
         
         if title == word {
-            let ac = UIAlertController(title: "Error, words equals", message: "Try another word.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+            showErrorMessage(errorTitle: "Error, words equals", errorMessage: "Try another word.")
             return false
         }
         
         
         //isso já retorna verdadeiro ou falso sem precisar de if else
         return misspelledRange.location == NSNotFound
+    }
+    
+    func showErrorMessage(errorTitle: String, errorMessage: String) {
+        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
 }
 
