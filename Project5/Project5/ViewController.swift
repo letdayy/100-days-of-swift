@@ -16,6 +16,8 @@ class ViewController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
+        
         
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             if let startWords = try? String(contentsOf: startWordsURL) {
@@ -31,7 +33,7 @@ class ViewController: UITableViewController {
     }
 
     //método que inicia o jogo
-    func startGame() {
+    @objc func startGame() {
         title = allWords.randomElement()
         usedWords.removeAll(keepingCapacity: true)
         tableView.reloadData()
@@ -63,14 +65,14 @@ class ViewController: UITableViewController {
     }
     
     func submit(_ answer: String) {
-        let lowerAwnser = answer.lowercased()
+        let lowerAnswer = answer.lowercased()
         
         let errorTitle: String
         let errorMessage: String
         
-        if isPossible(word: lowerAwnser) {
-            if isOriginal(word: lowerAwnser) {
-                if isReal(word: lowerAwnser) {
+        if isPossible(word: lowerAnswer) {
+            if isOriginal(word: lowerAnswer) {
+                if isReal(word: lowerAnswer) {
                     usedWords.insert(answer, at: 0)
                     
                     let indexPath = IndexPath(row: 0, section: 0)
@@ -119,6 +121,22 @@ class ViewController: UITableViewController {
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        
+        
+        if word.count < 3 {
+            let ac = UIAlertController(title: "Ops!", message: "Sorry, but \(word) has less than 3 characters. Try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+            return false
+        }
+        
+        if title == word {
+            let ac = UIAlertController(title: "Error, words equals", message: "Try another word.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+            return false
+        }
+        
         
         //isso já retorna verdadeiro ou falso sem precisar de if else
         return misspelledRange.location == NSNotFound
