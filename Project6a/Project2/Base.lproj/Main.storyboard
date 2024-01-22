@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hQE-aM-0LR">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Project2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezg-vP-EPC">
+                                <rect key="frame" x="96.666666666666686" y="277.66666666666669" width="200" height="102"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ezg-vP-EPC" secondAttribute="height" multiplier="112:57" id="cky-jg-OP5"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="us"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aGi-sx-Xqf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0m-Ag-WqX">
+                                <rect key="frame" x="96.666666666666686" y="409.66666666666669" width="200" height="101.66666666666669"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="t0m-Ag-WqX" secondAttribute="height" multiplier="112:57" id="xv9-mu-nMP"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="us"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jq2-hB-fy1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrR-AT-zyH">
+                                <rect key="frame" x="96.666666666666686" y="146" width="200" height="101.66666666666669"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="LrR-AT-zyH" secondAttribute="height" multiplier="112:57" id="NaQ-HM-6cU"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="us"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m26-en-l8g"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LrR-AT-zyH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="43" id="ESs-sW-Oy5"/>
+                            <constraint firstItem="Ezg-vP-EPC" firstAttribute="height" secondItem="LrR-AT-zyH" secondAttribute="height" id="FD2-d2-bIs"/>
+                            <constraint firstItem="t0m-Ag-WqX" firstAttribute="top" secondItem="Ezg-vP-EPC" secondAttribute="bottom" constant="30" id="KJB-da-PTY"/>
+                            <constraint firstItem="t0m-Ag-WqX" firstAttribute="centerX" secondItem="Ezg-vP-EPC" secondAttribute="centerX" id="L3M-Xs-okQ"/>
+                            <constraint firstItem="Ezg-vP-EPC" firstAttribute="centerX" secondItem="LrR-AT-zyH" secondAttribute="centerX" id="Mdp-I7-Ez6"/>
+                            <constraint firstItem="t0m-Ag-WqX" firstAttribute="height" secondItem="Ezg-vP-EPC" secondAttribute="height" id="Wa0-b4-WxW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="t0m-Ag-WqX" secondAttribute="bottom" constant="20" id="XiM-fc-WIw"/>
+                            <constraint firstItem="Ezg-vP-EPC" firstAttribute="top" secondItem="LrR-AT-zyH" secondAttribute="bottom" constant="30" id="YNZ-Eo-IgH"/>
+                            <constraint firstItem="LrR-AT-zyH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Zwn-l5-XsM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="im3-uG-ZYu"/>
+                    <connections>
+                        <outlet property="button1" destination="LrR-AT-zyH" id="LOr-dp-beF"/>
+                        <outlet property="button2" destination="Ezg-vP-EPC" id="lnz-KU-DUH"/>
+                        <outlet property="button3" destination="t0m-Ag-WqX" id="mR4-dy-Nwc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1063.3587786259541" y="3.5211267605633805"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="c9u-vd-WYz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hQE-aM-0LR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k7B-ZR-cQk">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="val-IS-xSD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2kM-Ly-4kE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.64122137404578" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="us" width="200" height="100"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
