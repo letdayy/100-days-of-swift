@@ -9,13 +9,15 @@ import UIKit
 import WebKit
 
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class WebViewController: UIViewController, WKNavigationDelegate {
     //forçar o desempacotamento de WebView
     var webView: WKWebView!
     //propriedade da barra de progresso
     var progressView: UIProgressView!
-    //array de sites
-    var websites = ["apple.com", "hackingwithswift.com", "github.com", "google.com"]
+    //array de sites vazio
+    var websites: [String]!
+    
+    var currentWebsite: Int!
     
     override func loadView() {
         webView = WKWebView()
@@ -27,13 +29,18 @@ class ViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard websites != nil && currentWebsite != nil else {
+            print("error")
+            navigationController?.popViewController(animated: true)
+            return
+        }
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
         
         //coloca um espaço em branco em toda a barra de navegação jogando o botão para a direita
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         //ícone de recarregar página
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
-        
         //botões do desafio
         let back = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(goBack))
         let foward = UIBarButtonItem(title: "Avançar", style: .plain, target: self, action: #selector(goForward))
@@ -50,7 +57,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         //adicionando o observador para saber o carregamento da página na barra de progresso
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         
-        let url = URL(string: "https://" + websites[0])!
+        let url = URL(string: "https://" + websites[currentWebsite])!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
     }
