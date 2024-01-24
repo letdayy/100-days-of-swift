@@ -18,7 +18,7 @@ class ViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItem))
         
         //botão que limpa a lista de compras
-        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearItems))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearItems))
 
     }
     
@@ -55,13 +55,13 @@ class ViewController: UITableViewController {
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
-    /*@objc func clearItems() {
+    @objc func clearItems() {
         
-        let confirmeTrash = UIAlertAction(title: "Are you sure you want to remove all items?", style: .default)
+        //let confirmeTrash = UIAlertAction(title: "Are you sure you want to remove all items?", style: .default)
         
         
         allItems.removeAll(keepingCapacity: true)
         tableView.reloadData()
-    }*/
+    }
 }
 
