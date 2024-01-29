@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
         <html>
         <head>
         <meta name"viewport" content="width=device-width, initial-scale=1">
-        <style> body { font-size: 300%; } </style>
+        <style> body { font-size: 250%; text-align: justify; padding: 10px; }  </style>
         </head>
         <body>
         \(detailItem.body)
