@@ -9,11 +9,17 @@ import UIKit
 
 class ViewController: UITableViewController {
     var petitions = [Petition]()
+    //petições filtradas
+    var filteredPetitions = [Petition]()
+    var isFiltereing = false
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showCredits))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(filterPetition))
         
         let urlString: String
         
@@ -31,6 +37,37 @@ class ViewController: UITableViewController {
         }
         
         showError()
+    }
+    
+    @objc func filterPetition() {
+        let ac = UIAlertController(title: "Filter petitions", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        let filterAction = UIAlertAction(title: "Filter", style: .default) {
+            [weak self, weak ac] action in
+            guard let message = ac?.textFields?[0].text else { return }
+            self?.filterPetitions(message)
+            
+        
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        ac.addAction(filterAction)
+        ac.addAction(cancelAction)
+        
+        present(ac, animated: true)
+    }
+    
+    func filterPetitions(_ message: String) {
+        if message.isEmpty {
+            isFiltereing = false
+            tableView.reloadData()
+            return
+        }
+        
+        filteredPetitions = petitions.filter { $0.title.contains(message)}
+        isFiltereing = true
+        tableView.reloadData()
     }
     
     @objc func showCredits() {
@@ -55,13 +92,13 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count
+        return isFiltereing ? filteredPetitions.count : petitions.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let petition = petitions[indexPath.row]
+        let petition = isFiltereing ? filteredPetitions[indexPath.row] : petitions[indexPath.row]
         cell.textLabel?.text = petition.title
         cell.detailTextLabel?.text = petition.body
         return cell
