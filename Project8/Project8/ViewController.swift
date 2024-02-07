@@ -22,6 +22,7 @@ class ViewController: UIViewController {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    var totalWords: Int = 0
     var level = 1
     
     override func loadView() {
@@ -165,12 +166,22 @@ class ViewController: UIViewController {
             
             currentAnswer.text = ""
             score += 1
+            totalWords -= 1
             
-            if score % 7 == 0 {
+            if totalWords == 0 {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        } else {
+            let ac = UIAlertController(title: "Ops!", message: "Invalid word. Try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
+            currentAnswer.text = ""
+            score -= 1
+            for btn in activedButtons {
+                btn.isHidden = false
+            }
+            present(ac, animated: true)
         }
     }
     
@@ -210,6 +221,8 @@ class ViewController: UIViewController {
                     let parts = line.description.components(separatedBy: ": ")
                     let answer = parts[0]
                     let clue = parts[1]
+                    
+                    totalWords = lines.count
                     
                     clueString += "\(index + 1). \(clue)\n"
                     
