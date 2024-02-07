@@ -119,6 +119,11 @@ class ViewController: UIViewController {
                 letterButton.setTitle("WWW", for: .normal)
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
                 
+                //adicionando borda
+                letterButton.layer.borderWidth = 1.0
+                letterButton.layer.borderColor = UIColor.lightGray.cgColor
+                
+                
                 let frame = CGRect(x: col * width, y: row * height, width: width, height: height)
                 letterButton.frame = frame
                 
