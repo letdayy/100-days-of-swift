@@ -11,7 +11,7 @@ class ViewController: UITableViewController {
     var petitions = [Petition]()
     //petições filtradas
     var filteredPetitions = [Petition]()
-    var isFiltereing = false
+    var isFiltering = false
     
 
     override func viewDidLoad() {
@@ -59,15 +59,19 @@ class ViewController: UITableViewController {
     }
     
     func filterPetitions(_ message: String) {
-        if message.isEmpty {
-            isFiltereing = false
-            tableView.reloadData()
-            return
+        DispatchQueue.global().async {
+            if message.isEmpty {
+                self.isFiltering = false
+                return
+            }
+            
+            self.filteredPetitions = self.petitions.filter { $0.title.contains(message)}
+            self.isFiltering = true
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
         
-        filteredPetitions = petitions.filter { $0.title.contains(message)}
-        isFiltereing = true
-        tableView.reloadData()
     }
     
     @objc func showCredits() {
@@ -92,13 +96,13 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isFiltereing ? filteredPetitions.count : petitions.count
+        return isFiltering ? filteredPetitions.count : petitions.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let petition = isFiltereing ? filteredPetitions[indexPath.row] : petitions[indexPath.row]
+        let petition = isFiltering ? filteredPetitions[indexPath.row] : petitions[indexPath.row]
         cell.textLabel?.text = petition.title
         cell.detailTextLabel?.text = petition.body
         return cell
