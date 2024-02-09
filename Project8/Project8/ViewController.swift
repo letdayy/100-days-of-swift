@@ -19,7 +19,10 @@ class ViewController: UIViewController {
     
     var score = 0 {
         didSet {
-            scoreLabel.text = "Score: \(score)"
+            //interface do usuário
+            DispatchQueue.main.async {
+                self.scoreLabel.text = "Score: \(self.score)"
+            }
         }
     }
     var totalWords: Int = 0
@@ -143,15 +146,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadLevel()
+        
+        DispatchQueue.global().async {
+            self.loadLevel()
+        }
+        
 
     }
 
     @objc func letterTapped(_ sender: UIButton) {
         guard let buttonTitle = sender.titleLabel?.text else { return}
-        currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
-        activedButtons.append(sender)
-        sender.isHidden = true
+        //interface do usuário
+        DispatchQueue.main.async {
+            self.currentAnswer.text = self.currentAnswer.text?.appending(buttonTitle)
+            self.activedButtons.append(sender)
+            sender.isHidden = true
+        }
     }
     
     @objc func submitTapped(_ sender: UIButton) {
@@ -162,26 +172,32 @@ class ViewController: UIViewController {
             
             var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
             splitAnswers?[solutionPosition] = answerText
-            answersLabel.text = splitAnswers?.joined(separator: "\n")
-            
-            currentAnswer.text = ""
-            score += 1
-            totalWords -= 1
-            
-            if totalWords == 0 {
-                let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
-                present(ac, animated: true)
+            //interface do usuário
+            DispatchQueue.main.async {
+                self.answersLabel.text = splitAnswers?.joined(separator: "\n")
+                
+                self.currentAnswer.text = ""
+                self.score += 1
+                self.totalWords -= 1
+                
+                if self.totalWords == 0 {
+                    let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: self.levelUp))
+                    self.present(ac, animated: true)
+            }
             }
         } else {
-            let ac = UIAlertController(title: "Ops!", message: "Invalid word. Try again.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
-            currentAnswer.text = ""
-            score -= 1
-            for btn in activedButtons {
-                btn.isHidden = false
+            //interface do usuário
+            DispatchQueue.main.async {
+                let ac = UIAlertController(title: "Ops!", message: "Invalid word. Try again.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                self.currentAnswer.text = ""
+                self.score -= 1
+                for btn in self.activedButtons {
+                    btn.isHidden = false
+                }
+                self.present(ac, animated: true)
             }
-            present(ac, animated: true)
         }
     }
     
@@ -207,7 +223,7 @@ class ViewController: UIViewController {
     }
     
     //função para carregar a informação dentro dos botões
-    func loadLevel() {
+    @objc func loadLevel() {
         var clueString = ""
         var solutionString = ""
         var letterBits = [String]()
