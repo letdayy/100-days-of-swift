@@ -19,7 +19,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
         
         updateGuessWordsLabel()
         updateRemainingChancesLabel()
@@ -27,6 +28,9 @@ class ViewController: UIViewController {
         guessButton.addTarget(self, action: #selector(guessAlert), for: .touchUpInside)
     }
     
+    @objc func startGame() {
+        
+    }
     
 
     @objc func guessAlert() {
@@ -62,11 +66,15 @@ class ViewController: UIViewController {
             
             let ac = UIAlertController(title: "Letra errada", message: "Tente novamente outra letra.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            present(ac, animated: true)
         }
         
         if numberRemainingChances <= 0 {
             let ac = UIAlertController(title: "Fim de jogo", message: nil, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            present(ac, animated: true)
         }
         
         updateGuessWordsLabel()
