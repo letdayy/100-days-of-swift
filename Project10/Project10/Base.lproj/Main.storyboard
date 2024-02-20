@@ -45,7 +45,7 @@
                                 </collectionViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="imageView" destination="n9X-5j-wHS" id="PHZ-ne-A6e"/>
+                                    <outlet property="imageView" destination="YZv-hP-K0Z" id="BK0-xo-fdj"/>
                                     <outlet property="name" destination="ec7-q4-HEp" id="Wew-6X-5Io"/>
                                 </connections>
                             </collectionViewCell>
