@@ -28,7 +28,7 @@
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Card" id="WaZ-8X-7jk" customClass="CardCell" customModule="Project1" customModuleProvider="target">
                                 <rect key="frame" x="40" y="10" width="140" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yrN-Gs-qYo" customClass="CardCell" customModule="Project1" customModuleProvider="target">
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yrN-Gs-qYo">
                                     <rect key="frame" x="0.0" y="0.0" width="140" height="180"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -57,33 +57,33 @@
             <point key="canvasLocation" x="1683.206106870229" y="13.380281690140846"/>
         </scene>
         <!--Detail View Controller-->
-        <scene sceneID="1rl-Ot-vf2">
+        <scene sceneID="n40-BS-wDT">
             <objects>
-                <viewController storyboardIdentifier="Detail" id="ymr-IT-Ngw" customClass="DetailViewController" customModule="Project1" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="LIl-z2-Trl">
+                <viewController storyboardIdentifier="Detail" id="j01-v1-PbW" customClass="DetailViewController" customModule="Project1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rra-M5-sWr">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZsO-bW-BAi">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CGx-h2-hX0">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="IWi-u9-5c7"/>
+                        <viewLayoutGuide key="safeArea" id="g1I-te-Szo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ZsO-bW-BAi" firstAttribute="centerY" secondItem="LIl-z2-Trl" secondAttribute="centerY" id="QwB-DN-bNq"/>
-                            <constraint firstItem="ZsO-bW-BAi" firstAttribute="centerX" secondItem="LIl-z2-Trl" secondAttribute="centerX" id="RCW-PN-Uxz"/>
-                            <constraint firstItem="ZsO-bW-BAi" firstAttribute="leading" secondItem="IWi-u9-5c7" secondAttribute="leading" id="TuO-Cl-m0m"/>
-                            <constraint firstItem="ZsO-bW-BAi" firstAttribute="top" secondItem="LIl-z2-Trl" secondAttribute="topMargin" constant="-59" id="dXh-VX-wHa"/>
+                            <constraint firstItem="CGx-h2-hX0" firstAttribute="leading" secondItem="g1I-te-Szo" secondAttribute="leading" id="3mQ-th-b0R"/>
+                            <constraint firstItem="CGx-h2-hX0" firstAttribute="centerY" secondItem="rra-M5-sWr" secondAttribute="centerY" id="B9P-0b-3Hi"/>
+                            <constraint firstItem="CGx-h2-hX0" firstAttribute="centerX" secondItem="rra-M5-sWr" secondAttribute="centerX" id="VMC-cX-fum"/>
+                            <constraint firstItem="CGx-h2-hX0" firstAttribute="top" secondItem="rra-M5-sWr" secondAttribute="topMargin" constant="-59" id="jt9-iB-yBc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="ZsO-bW-BAi" id="LMz-vN-hqP"/>
+                        <outlet property="imageView" destination="CGx-h2-hX0" id="bNW-6s-Aax"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gOG-Kl-3yN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pk0-d1-dd2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2470.9923664122134" y="-1.4084507042253522"/>
+            <point key="canvasLocation" x="2591.6030534351144" y="21.83098591549296"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GxX-S3-Ghy">

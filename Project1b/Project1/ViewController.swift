@@ -47,13 +47,15 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
-            vc.selectedImage = pictures[indexPath.item]
-            vc.selectedImageIndex = indexPath.item + 1
-            vc.totalImages = pictures.count
+        let selectedImage = pictures[indexPath.item]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let detailViewController = storyboard.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            detailViewController.selectedImage = selectedImage
             
-            present(vc, animated: true)
+            navigationController?.pushViewController(detailViewController, animated: true)
         }
-    }
+            }
 }
 

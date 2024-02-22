@@ -24,7 +24,7 @@
 		B03D8C102B3DB419003B1317 /* nssl0043.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B03D8C062B3DB419003B1317 /* nssl0043.jpg */; };
 		B03D8C112B3DB419003B1317 /* nssl0033.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B03D8C072B3DB419003B1317 /* nssl0033.jpg */; };
 		B03D8C122B3DB419003B1317 /* nssl0034.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B03D8C082B3DB419003B1317 /* nssl0034.jpg */; };
-		B07F6FA72B3F0324008812B2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07F6FA62B3F0324008812B2 /* DetailViewController.swift */; };
+		B0EE49152B8793EF00229FD5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EE49142B8793EF00229FD5 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,7 @@
 		B03D8C062B3DB419003B1317 /* nssl0043.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0043.jpg; sourceTree = "<group>"; };
 		B03D8C072B3DB419003B1317 /* nssl0033.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0033.jpg; sourceTree = "<group>"; };
 		B03D8C082B3DB419003B1317 /* nssl0034.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0034.jpg; sourceTree = "<group>"; };
-		B07F6FA62B3F0324008812B2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B0EE49142B8793EF00229FD5 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,7 @@
 				B03D8BEA2B3D9AD0003B1317 /* AppDelegate.swift */,
 				B03D8BEC2B3D9AD0003B1317 /* SceneDelegate.swift */,
 				B03D8BEE2B3D9AD0003B1317 /* ViewController.swift */,
-				B07F6FA62B3F0324008812B2 /* DetailViewController.swift */,
+				B0EE49142B8793EF00229FD5 /* DetailViewController.swift */,
 				B03D8BF02B3D9AD0003B1317 /* Main.storyboard */,
 				B01ACABA2B86BCF800E482B9 /* CardCell.swift */,
 				B03D8BF32B3D9AD1003B1317 /* Assets.xcassets */,
@@ -194,9 +194,9 @@
 			files = (
 				B01ACABB2B86BCF800E482B9 /* CardCell.swift in Sources */,
 				B03D8BEF2B3D9AD0003B1317 /* ViewController.swift in Sources */,
+				B0EE49152B8793EF00229FD5 /* DetailViewController.swift in Sources */,
 				B03D8BEB2B3D9AD0003B1317 /* AppDelegate.swift in Sources */,
 				B03D8BED2B3D9AD0003B1317 /* SceneDelegate.swift in Sources */,
-				B07F6FA72B3F0324008812B2 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

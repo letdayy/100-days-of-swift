@@ -2,13 +2,14 @@
 //  DetailViewController.swift
 //  Project1
 //
-//  Created by leticia.dayane on 29/12/23.
+//  Created by leticia.dayane on 22/02/24.
 //
 
 import UIKit
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
+    
     
     var selectedImage: String?
     var selectedImageIndex: Int?
@@ -27,7 +28,13 @@ class DetailViewController: UIViewController {
        
 
         if let imageToLoad = selectedImage {
-            imageView.image = UIImage(named: imageToLoad)
+            if let image = UIImage(named: imageToLoad) {
+                imageView?.image = image
+            } else {
+                print("Error: image download is failed")
+            }
+        } else {
+            print("Error: nil selectedImage")
         }
     }
     
