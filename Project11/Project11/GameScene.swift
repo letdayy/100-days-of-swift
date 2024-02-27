@@ -10,6 +10,10 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel: SKLabelNode!
     var editLabel: SKLabelNode!
+    var remainingBallsLabel: SKLabelNode!
+    var resultLabel: SKLabelNode!
+    var totalBoxCount = 0
+    var restartGame: SKLabelNode!
     
     var score = 0 {
         didSet {
@@ -27,13 +31,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var remainingBalls = 5 {
+        didSet {
+            remainingBallsLabel.text = "Balls: \(remainingBalls)"
+        }
+    }
+    
     override func didMove(to view: SKView) {
         //adicionando plano de fundo
-        let background = SKSpriteNode(imageNamed: "background")
-        background.position = CGPoint(x: 512, y: 384)
+        let background = SKSpriteNode(imageNamed: "rainbow")
+        
+        //obter tamanho da tela do ipad
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        background.size = CGSize(width: screenWidth, height: screenHeight)
+        background.position = CGPoint(x: screenWidth / 2, y: screenHeight / 2) //definir para centro da tela
         background.blendMode = .replace
         background.zPosition = -1 //para deixar o plano de fundo atrás sempre
         addChild(background)
+        
+        remainingBallsLabel = SKLabelNode(fontNamed: "Chalkduster")
+        remainingBallsLabel.text = "Balls: \(remainingBalls)"
+        remainingBallsLabel.horizontalAlignmentMode = .right
+        remainingBallsLabel.position = CGPoint(x: 560, y: 700)
+        remainingBallsLabel.fontColor = UIColor.black
+        addChild(remainingBallsLabel)
+        
+        resultLabel = SKLabelNode(fontNamed: "Chalkduster")
+        resultLabel.text = ""
+        resultLabel.horizontalAlignmentMode = .center
+        resultLabel.position = CGPoint(x: 540, y: 540)
+        addChild(resultLabel)
+        
+        restartGame = SKLabelNode(fontNamed: "Chalkduster")
+        restartGame.text = "Restart"
+        restartGame.position = CGPoint(x: 100, y: 100)
+        restartGame.fontColor = UIColor.black
+        addChild(restartGame)
+        
         //colocando um peso na caixa
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         
@@ -55,6 +92,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //mostrando pontuação
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
         scoreLabel.text = "Score: 0"
+        scoreLabel.fontColor = UIColor.black
         scoreLabel.horizontalAlignmentMode = .right
         scoreLabel.position = CGPoint(x: 980, y: 700)
         addChild(scoreLabel)
@@ -62,8 +100,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //label de edição
         editLabel = SKLabelNode(fontNamed: "Chalkduster")
         editLabel.text = "Edit"
+        editLabel.fontColor = UIColor.black
         editLabel.position = CGPoint(x: 80, y: 700)
         addChild(editLabel)
+        
+        makeRandomBoxes(number: 10)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -101,17 +142,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         break
                     }
                     
-                    let ball = SKSpriteNode(imageNamed: colorBall)
+                    if remainingBalls > 0 {
+                        let ball = SKSpriteNode(imageNamed: colorBall)
+                        
+                        ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
+                        ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
+                        ball.physicsBody?.restitution = 0.4
+                        ball.position = CGPoint(x: location.x, y: 700)
+                        ball.name = "ball"
+                        addChild(ball)
+                    }
                     
-                    ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
-                    ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
-                    ball.physicsBody?.restitution = 0.4
-                    ball.position = CGPoint(x: location.x, y: 700)
-                    ball.name = "ball"
-                    addChild(ball)
+                }
+                
+                if objects.contains(restartGame) {
+                    newGame()
                 }
             }
         }
+    }
+    
+    func newGame() {
+        remainingBalls = 5
+        
+        resultLabel.text = ""
+        
+        for node in children {
+            if node.name == "box" || node.name == "ball" {
+                node.removeFromParent()
+            }
+        }
+        
+        makeRandomBoxes(number: 10)
     }
     
     func makeRandomBoxes(number: Int) {
@@ -124,6 +186,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
             box.physicsBody?.isDynamic = false
+            box.name = "box"
+            totalBoxCount = number
             
             addChild(box)
         }
@@ -167,16 +231,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func collisionBetween(ball: SKNode, object: SKNode) {
+        if object.name == "box" {
+            object.removeFromParent()
+            totalBoxCount -= 1
+        }
+        
         if object.name == "good" {
-            destroy(ball: ball)
+            destroyBall(ball: ball)
             score += 1
+            result()
         } else if object.name == "bad" {
-            destroy(ball: ball)
+            destroyBall(ball: ball)
             score -= 1
+            remainingBalls -= 1
+            result()
         }
     }
     
-    func destroy(ball: SKNode) {
+    func result() {
+        if totalBoxCount == 0 {
+            resultLabel.fontColor = UIColor.green
+            resultLabel.text = "VICTORY!"
+        } else if remainingBalls == 0 {
+                resultLabel.fontColor = UIColor.red
+                resultLabel.text = "DEFEAT :/"
+            }
+        }
+    
+    //checa se ainda tem caixa no jogo
+    func remainingBoxes() -> Bool {
+        for node in children {
+            if node.name == "box" {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func destroyBall(ball: SKNode) {
         ball.removeFromParent()
     }
     
