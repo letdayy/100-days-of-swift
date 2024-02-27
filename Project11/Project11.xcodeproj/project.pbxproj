@@ -14,6 +14,7 @@
 		B02B83812B891545005D4181 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B02B83802B891545005D4181 /* Assets.xcassets */; };
 		B02B83842B891545005D4181 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B02B83822B891545005D4181 /* LaunchScreen.storyboard */; };
 		B02B838B2B8915D9005D4181 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B02B838A2B8915D9005D4181 /* GameScene.sks */; };
+		B0A92E692B8E7A8100ADE893 /* Swift.gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B0A92E682B8E7A8100ADE893 /* Swift.gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		B02B83802B891545005D4181 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B02B83832B891545005D4181 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B02B838A2B8915D9005D4181 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		B0A92E682B8E7A8100ADE893 /* Swift.gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Swift.gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				B02B837D2B891544005D4181 /* Main.storyboard */,
 				B02B83802B891545005D4181 /* Assets.xcassets */,
 				B02B83822B891545005D4181 /* LaunchScreen.storyboard */,
+				B0A92E682B8E7A8100ADE893 /* Swift.gitignore */,
 			);
 			path = Project11;
 			sourceTree = "<group>";
@@ -126,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A92E692B8E7A8100ADE893 /* Swift.gitignore in Resources */,
 				B02B837F2B891544005D4181 /* Main.storyboard in Resources */,
 				B02B838B2B8915D9005D4181 /* GameScene.sks in Resources */,
 				B02B83812B891545005D4181 /* Assets.xcassets in Resources */,
