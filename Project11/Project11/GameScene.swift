@@ -62,7 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         resultLabel = SKLabelNode(fontNamed: "Chalkduster")
         resultLabel.text = ""
         resultLabel.horizontalAlignmentMode = .center
-        resultLabel.position = CGPoint(x: 540, y: 540)
+        resultLabel.position = CGPoint(x: 490, y: 540)
         addChild(resultLabel)
         
         restartGame = SKLabelNode(fontNamed: "Chalkduster")
