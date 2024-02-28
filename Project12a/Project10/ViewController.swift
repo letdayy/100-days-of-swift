@@ -65,6 +65,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
+        save()
         present(ac, animated: true)
     }
 
@@ -82,6 +83,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
             guard let newName = ac?.textFields?.first?.text else { return }
             person.name = newName
             
+            self?.save()
             self?.collectionView.reloadData()
         })
         
@@ -91,6 +93,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     func deletePerson(at indexPath: IndexPath) {
         people.remove(at: indexPath.item)
         collectionView.deleteItems(at: [indexPath])
+        save()
     }
     
     @objc func addNewPerson() {
@@ -115,11 +118,20 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         collectionView.reloadData()
         
         dismiss(animated: true)
+        
+        save()
     }
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
+    }
+    
+    func save() {
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: people, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "people")
+        }
     }
 }
 
