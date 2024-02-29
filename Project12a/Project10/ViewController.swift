@@ -93,7 +93,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     func deletePerson(at indexPath: IndexPath) {
         people.remove(at: indexPath.item)
         collectionView.deleteItems(at: [indexPath])
-        save()
+        self.save()
     }
     
     @objc func addNewPerson() {
@@ -115,11 +115,10 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         
         let person = Person(name: "Unknown", image: imageName)
         people.append(person)
+        self.save()
         collectionView.reloadData()
         
         dismiss(animated: true)
-        
-        save()
     }
     
     func getDocumentsDirectory() -> URL {
