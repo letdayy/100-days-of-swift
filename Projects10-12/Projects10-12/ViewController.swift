@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    var images = [Image]()
+    var images: [String] = []
+    var captions: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,8 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
         title = "Guard your memories here!"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewImage))
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Picture")
     }
     
     @objc func addNewImage() {
@@ -27,25 +30,45 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.editedImage] as? UIImage else { return }
-        
-        let imageName = UUID().uuidString
-        let imagePath = getDocumentsDirectory().appendingPathExtension(imageName)
-        
-        if let jpegData = image.jpegData(compressionQuality: 0.8) {
-            try? jpegData.write(to: imagePath)
+        if let image = info[.editedImage] as? UIImage {
+            picker.dismiss(animated: true)
+            addImage(image: image)
         }
-        
-        let picture =  Image(name: "Unknown", image: imageName)
-        images.append(picture)
-        tableView.reloadData()
-        
-        dismiss(animated: true)
     }
     
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
+    func addImage(image: UIImage) {
+        let vc = UIAlertController(title: "Add subtitle", message: nil, preferredStyle: .alert)
+        vc.addTextField { textField in
+            textField.placeholder = "Subtitle"
+        }
+        
+        let imagePath = saveImage(image: image)
+        
+        let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+            if let text = vc.textFields?.first?.text {
+                let imagePath = self?.saveImage(image: image)
+                self?.images.append(imagePath ?? "")
+                self?.captions.append((text))
+                self?.tableView.reloadData()
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        vc.addAction(addAction)
+        vc.addAction(cancel)
+        
+        present(vc, animated: true)
+    }
+    
+    func saveImage(image: UIImage) -> String {
+        let fileName = UUID().uuidString
+        let fileURL = FileManagerHelper.getDocumentsDirectory().appendingPathExtension(fileName)
+        if let imageData = image.pngData() {
+            try? imageData.write(to: fileURL)
+            return fileName
+        }
+        return ""
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,9 +77,23 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        cell.textLabel?.text = "Text here" //modificar o texto depois
+        
+        cell.textLabel?.text = images[indexPath.row]
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            guard indexPath.row < images.count else { return }
+            
+            let imageName = images[indexPath.row]
+            
+            vc.selectedImage = imageName
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
 
 }
 
