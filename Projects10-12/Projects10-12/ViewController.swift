@@ -9,8 +9,8 @@ import UIKit
 
 class ViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    var images: [String] = []
-    var captions: [String] = []
+    
+    var pictures = [Picture]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,13 +42,13 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
             textField.placeholder = "Subtitle"
         }
         
-        let imagePath = saveImage(image: image)
-        
         let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
             if let text = vc.textFields?.first?.text {
                 let imagePath = self?.saveImage(image: image)
-                self?.images.append(imagePath ?? "")
-                self?.captions.append((text))
+                
+                let picture = Picture(image: imagePath ?? "", caption: text)
+                
+                self?.pictures.append(picture)
                 self?.tableView.reloadData()
             }
         }
@@ -72,24 +72,28 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return images.count
+        return pictures.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         
-        cell.textLabel?.text = captions[indexPath.row]
+        let picture = pictures[indexPath.row]
+        
+        cell.textLabel?.text = picture.caption
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            guard indexPath.row < images.count else { return }
+            guard indexPath.row < pictures.count else { return }
             
-            let imageName = images[indexPath.row]
-            let subtitle = captions[indexPath.row]
+            let picture = pictures[indexPath.row]
             
-            vc.selectedImage = imageName
+            let image = picture.image
+            let subtitle = picture.caption
+            
+            vc.selectedImage = image
             vc.selectedSubtitle = subtitle
             
             navigationController?.pushViewController(vc, animated: true)

@@ -15,6 +15,7 @@
 		B00AB7DB2B95FCB9002F6CC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B00AB7D92B95FCB9002F6CC2 /* LaunchScreen.storyboard */; };
 		B00AB7E72B963DE8002F6CC2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB7E62B963DE8002F6CC2 /* DetailViewController.swift */; };
 		B00AB7E92B964CEB002F6CC2 /* FileManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB7E82B964CEB002F6CC2 /* FileManagerHelper.swift */; };
+		B00AB7EB2B96642A002F6CC2 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB7EA2B96642A002F6CC2 /* Picture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		B00AB7DC2B95FCB9002F6CC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B00AB7E62B963DE8002F6CC2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B00AB7E82B964CEB002F6CC2 /* FileManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerHelper.swift; sourceTree = "<group>"; };
+		B00AB7EA2B96642A002F6CC2 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				B00AB7CE2B95FCB8002F6CC2 /* AppDelegate.swift */,
 				B00AB7D02B95FCB8002F6CC2 /* SceneDelegate.swift */,
 				B00AB7D22B95FCB8002F6CC2 /* ViewController.swift */,
+				B00AB7EA2B96642A002F6CC2 /* Picture.swift */,
 				B00AB7E82B964CEB002F6CC2 /* FileManagerHelper.swift */,
 				B00AB7D42B95FCB8002F6CC2 /* Main.storyboard */,
 				B00AB7E62B963DE8002F6CC2 /* DetailViewController.swift */,
@@ -144,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B00AB7EB2B96642A002F6CC2 /* Picture.swift in Sources */,
 				B00AB7E92B964CEB002F6CC2 /* FileManagerHelper.swift in Sources */,
 				B00AB7D32B95FCB8002F6CC2 /* ViewController.swift in Sources */,
 				B00AB7E72B963DE8002F6CC2 /* DetailViewController.swift in Sources */,
