@@ -78,7 +78,7 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         
-        cell.textLabel?.text = images[indexPath.row]
+        cell.textLabel?.text = captions[indexPath.row]
         return cell
     }
     
