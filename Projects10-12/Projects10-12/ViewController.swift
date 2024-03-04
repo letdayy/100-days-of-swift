@@ -87,8 +87,10 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
             guard indexPath.row < images.count else { return }
             
             let imageName = images[indexPath.row]
+            let subtitle = captions[indexPath.row]
             
             vc.selectedImage = imageName
+            vc.selectedSubtitle = subtitle
             
             navigationController?.pushViewController(vc, animated: true)
         }
