@@ -20,6 +20,18 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewImage))
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Picture")
+        
+        let defaults = UserDefaults.standard
+        
+        if let savedPictures = defaults.object(forKey: "pictures") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                pictures = try jsonDecoder.decode([Picture].self, from: savedPictures)
+            } catch {
+                print("Failed to load pictures.")
+            }
+        }
     }
     
     @objc func addNewImage() {
@@ -49,6 +61,7 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
                 let picture = Picture(image: imagePath ?? "", caption: text)
                 
                 self?.pictures.append(picture)
+                self?.save()
                 self?.tableView.reloadData()
             }
         }
@@ -100,6 +113,19 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate & U
         }
     }
 
+    func save() {
+        let jsonEncoder = JSONEncoder()
+        if let savedData = try? jsonEncoder.encode(pictures) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "pictures")
+        } else {
+            print("Error to save pictures.")
+        }
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 }
 

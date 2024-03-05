@@ -24,6 +24,8 @@ class DetailViewController: UIViewController {
             let fileURL = FileManagerHelper.getDocumentsDirectory().appendingPathExtension(imageToLoad)
             imageView.image = UIImage(contentsOfFile: fileURL.path)
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButtonTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,15 +37,30 @@ class DetailViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.hidesBarsOnTap = false
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @objc func deleteButtonTapped() {
+        if let imageToLoad = selectedImage, let subtitle = selectedSubtitle {
+            let documentsDirectory = FileManagerHelper.getDocumentsDirectory()
+            let imageURL = documentsDirectory.appendingPathExtension(imageToLoad)
+            
+            if let index = navigationController?.viewControllers.firstIndex(where: {$0 is ViewController}) {
+                if let vc = navigationController?.viewControllers[index] as? ViewController {
+                    if let pictureIndex = vc.pictures.firstIndex(where: { $0.image == imageToLoad && $0.caption == subtitle}) {
+                        vc.pictures.remove(at: pictureIndex)
+                        vc.save()
+                    }
+                }
+            }
+            
+            do {
+                try FileManager.default.removeItem(at: imageURL)
+                
+                navigationController?.popViewController(animated: true)
+            } catch {
+                print("Error to delete image.")
+            }
+        }
     }
-    */
+
 
 }
