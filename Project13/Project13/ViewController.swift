@@ -11,7 +11,10 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var intensity: UISlider!
-    @IBOutlet weak var buttonFilter: UIButton! //challenge 2
+    //challenge 3
+    @IBOutlet weak var radius: UISlider!
+    //challenge 2
+    @IBOutlet weak var buttonFilter: UIButton!
     
     var currentImage: UIImage!
     var context: CIContext!
@@ -32,11 +35,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let inputKeys = currentFilter.inputKeys
         
         if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(intensity.value, forKey: kCIInputIntensityKey)}
-        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(intensity.value * 200, forKey: kCIInputRadiusKey)}
+        
+        if inputKeys.contains(kCIInputRadiusKey) {
+            //challenge 3
+            currentFilter.setValue(radius.value * 200, forKey: kCIInputRadiusKey)}
+        
         if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(intensity.value * 10, forKey: kCIInputScaleKey)}
+        
         if inputKeys.contains(kCIInputCenterKey) { currentFilter.setValue(CIVector(x: currentImage.size.width / 2, y: currentImage.size.height / 2), forKey: kCIInputCenterKey)}
         
-        if let cgimg = context.createCGImage(currentFilter.outputImage!, from: currentFilter.outputImage!.extent) {
+        guard let currentFilter = currentFilter.outputImage else {
+            alert(title: "Error!", message: ":/")
+            return
+        }
+        
+        if let cgimg = context.createCGImage(currentFilter, from: currentFilter.extent) {
             let processedImage = UIImage(cgImage: cgimg)
             imageView.image = processedImage
         }
@@ -53,7 +66,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         currentFilter = CIFilter(name: actionTitle)
         
         let beginImage = CIImage(image: currentImage)
-        currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        
+        if (currentFilter != nil) {
+            currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        } else {
+            alert(title: "Ops", message: "Filter not found")
+        }
         
         applyProcessing()
     }
@@ -96,6 +114,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func intensityChanged(_ sender: Any) {
+        applyProcessing()
+    }
+    
+    
+    @IBAction func radiusChanged(_ sender: Any) {
         applyProcessing()
     }
     
