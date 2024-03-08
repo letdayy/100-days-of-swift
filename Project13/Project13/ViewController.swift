@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var intensity: UISlider!
+    @IBOutlet weak var buttonFilter: UIButton! //challenge 2
     
     var currentImage: UIImage!
     var context: CIContext!
@@ -45,6 +46,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         guard currentImage != nil else { return }
         
         guard let actionTitle = action.title else { return }
+        
+        //challenge 2
+        buttonFilter.setTitle(actionTitle, for: .normal)
         
         currentFilter = CIFilter(name: actionTitle)
         
