@@ -75,9 +75,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func save(_ sender: Any) {
-        guard let image = imageView.image else { return }
+        //challenge 1
+        guard let image = imageView.image else {
+            alert(title: "Error", message: "Please select an image first")
+            return
+        }
         
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    //challenge 1
+    func alert(title: String, message: String) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
     
     @IBAction func intensityChanged(_ sender: Any) {
@@ -99,13 +110,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+            alert(title: "Save error", message: error.localizedDescription)
         } else {
-            let ac = UIAlertController(title: "Saved!", message: "Your image was saved successfully", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+            alert(title: "Saved!", message: "Your image was saved successfully")
         }
     }
 }
