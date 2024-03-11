@@ -14,6 +14,7 @@ class GameScene: SKScene {
             gameScore.text = "Score: \(score)"
         }
     }
+    var slots = [WhackSlot]()
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "whackBackground")
@@ -28,9 +29,21 @@ class GameScene: SKScene {
         gameScore.horizontalAlignmentMode = .left
         gameScore.fontSize = 48
         addChild(gameScore)
+        
+        for i in 0..<5 { createSlot(at: CGPoint(x: 100 + (i * 170), y: 410))}
+        for i in 0..<4 { createSlot(at: CGPoint(x: 180 + (i * 170), y: 320))}
+        for i in 0..<5 { createSlot(at: CGPoint(x: 100 + (i * 170), y: 230))}
+        for i in 0..<4 { createSlot(at: CGPoint(x: 180 + (i * 170), y: 140))}
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+    }
+    
+    func createSlot(at position: CGPoint) {
+        let slot = WhackSlot()
+        slot.configure(at: position)
+        addChild(slot)
+        slots.append(slot)
     }
 }
