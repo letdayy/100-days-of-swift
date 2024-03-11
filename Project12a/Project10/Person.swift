@@ -16,13 +16,15 @@ class Person: NSObject, NSCoding {
         self.image = image
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
-        image = aDecoder.decodeObject(forKey: "image") as? String ?? ""
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let name = aDecoder.decodeObject(forKey: "name") as? String,
+        let image = aDecoder.decodeObject(forKey: "image") as? String
+        else { return nil }
+        self.init(name: name, image: image)
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "name")
-        aCoder.encode(image, forKey: "image")
+        aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.image, forKey: "image")
     }
 }
