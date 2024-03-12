@@ -19,6 +19,9 @@ class GameScene: SKScene {
     
     var numRounds = 0
     
+    //challenge 2
+    var finalScore: SKLabelNode!
+    
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "whackBackground")
         background.position = CGPoint(x: 512, y: 384)
@@ -88,6 +91,17 @@ class GameScene: SKScene {
             gameOver.position = CGPoint(x: 512, y: 384)
             gameOver.zPosition = 1
             addChild(gameOver)
+            
+            finalScore = SKLabelNode(fontNamed: "Chalkduster")
+            finalScore.text = "Final score: \(score)"
+            finalScore.zPosition = 1
+            finalScore.fontSize = 30
+            finalScore.position = CGPoint(x: 500, y: 500)
+            finalScore.fontColor = UIColor.black
+            addChild(finalScore)
+            
+            //challenge 1
+            run(SKAction.playSoundFileNamed("game-over-challenge.mp3", waitForCompletion: false))
             
             return
         }
