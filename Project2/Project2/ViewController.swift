@@ -67,6 +67,11 @@ class ViewController: UIViewController {
         
         if count > 10 {
             result = UIAlertController(title: "Congratulations! You completed the challenge", message: "Final score: \(score)", preferredStyle: .alert)
+            result.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in
+                self.count = 0
+                self.score = 0
+                self.askQuestion()
+            }))
             present(result, animated: true)
             
         }
@@ -74,12 +79,19 @@ class ViewController: UIViewController {
      
     }
     
-    
-    
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
         var ac: UIAlertController
         
+        //challenge project15
+        UIView.animate(withDuration: 0.2, animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }) { _ in
+            //reverte o tamanho do botão
+            UIView.animate(withDuration: 0.2, animations: {
+                sender.transform = CGAffineTransform.identity
+            })
+        }
         
         if sender.tag == correctAwnser {
             title = "Correct!"
