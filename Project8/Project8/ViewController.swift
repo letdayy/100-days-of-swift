@@ -151,7 +151,13 @@ class ViewController: UIViewController {
         guard let buttonTitle = sender.titleLabel?.text else { return}
         currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
         activedButtons.append(sender)
-        sender.isHidden = true
+        
+        //challenge project15
+        if activedButtons.contains(sender) {
+            UIView.animate(withDuration: 1, animations: {
+                sender.alpha = 0
+            })
+        }
     }
     
     @objc func submitTapped(_ sender: UIButton) {
@@ -179,7 +185,10 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score -= 1
             for btn in activedButtons {
-                btn.isHidden = false
+                //challenge project15
+                UIView.animate(withDuration: 1, animations: {
+                    btn.alpha = 1
+                })
             }
             present(ac, animated: true)
         }
@@ -193,14 +202,20 @@ class ViewController: UIViewController {
         loadLevel()
         
         for btn in letterButtons {
-            btn.isHidden = false
+            //challenge project15
+            UIView.animate(withDuration: 1, animations: {
+                btn.alpha = 1
+            })
         }
     }
     
     @objc func clearTapped(_ sender: UIButton) {
         currentAnswer.text = ""
         for btn in activedButtons {
-            btn.isHidden = false
+            //challenge project15
+            UIView.animate(withDuration: 1, animations: {
+                btn.alpha = 1
+            })
         }
         
         activedButtons.removeAll()
