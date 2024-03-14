@@ -29,6 +29,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         context = CIContext()
         currentFilter = CIFilter(name: "CISepiaTone")
+        
+        //challenge project15
+        imageView.alpha = 0
     }
     
     func applyProcessing() {
@@ -127,8 +130,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         applyProcessing()
     }
     
+    //método que recebe a imagem selecionada
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
+        
+        //challenge project15
+        self.imageView.alpha = 0 //resetando para aplicar o efeito novamente
+        imageView.image = image
+        
+        UIView.animate(withDuration: 1) {
+            self.imageView.alpha = 1 //alterando o efeito gradualmente
+        }
         
         dismiss(animated: true)
         
