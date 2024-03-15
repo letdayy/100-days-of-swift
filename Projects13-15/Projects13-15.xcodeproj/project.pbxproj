@@ -14,6 +14,8 @@
 		B0048B9D2BA4EBAA001DC290 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0048B9C2BA4EBAA001DC290 /* Assets.xcassets */; };
 		B0048BA02BA4EBAA001DC290 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0048B9E2BA4EBAA001DC290 /* LaunchScreen.storyboard */; };
 		B0048BA82BA4EF32001DC290 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0048BA72BA4EF32001DC290 /* Country.swift */; };
+		B0048BAC2BA4FA3E001DC290 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = B0048BAB2BA4FA3E001DC290 /* countries.json */; };
+		B0048BAE2BA4FB25001DC290 /* CountryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0048BAD2BA4FB25001DC290 /* CountryTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		B0048B9F2BA4EBAA001DC290 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0048BA12BA4EBAA001DC290 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0048BA72BA4EF32001DC290 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		B0048BAB2BA4FA3E001DC290 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
+		B0048BAD2BA4FB25001DC290 /* CountryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +67,11 @@
 				B0048B972BA4EBA9001DC290 /* ViewController.swift */,
 				B0048BA72BA4EF32001DC290 /* Country.swift */,
 				B0048B992BA4EBA9001DC290 /* Main.storyboard */,
+				B0048BAD2BA4FB25001DC290 /* CountryTableViewController.swift */,
 				B0048B9C2BA4EBAA001DC290 /* Assets.xcassets */,
 				B0048B9E2BA4EBAA001DC290 /* LaunchScreen.storyboard */,
 				B0048BA12BA4EBAA001DC290 /* Info.plist */,
+				B0048BAB2BA4FA3E001DC290 /* countries.json */,
 			);
 			path = "Projects13-15";
 			sourceTree = "<group>";
@@ -130,6 +136,7 @@
 			files = (
 				B0048BA02BA4EBAA001DC290 /* LaunchScreen.storyboard in Resources */,
 				B0048B9D2BA4EBAA001DC290 /* Assets.xcassets in Resources */,
+				B0048BAC2BA4FA3E001DC290 /* countries.json in Resources */,
 				B0048B9B2BA4EBA9001DC290 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0048BAE2BA4FB25001DC290 /* CountryTableViewController.swift in Sources */,
 				B0048BA82BA4EF32001DC290 /* Country.swift in Sources */,
 				B0048B982BA4EBA9001DC290 /* ViewController.swift in Sources */,
 				B0048B942BA4EBA9001DC290 /* AppDelegate.swift in Sources */,
