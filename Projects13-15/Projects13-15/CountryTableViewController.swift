@@ -14,6 +14,11 @@ class CountryTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView()
+        
+        title = country?.name
+        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     // MARK: - Table view data source
@@ -30,7 +35,7 @@ class CountryTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Detail", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CountryDetail", for: indexPath)
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Capital"

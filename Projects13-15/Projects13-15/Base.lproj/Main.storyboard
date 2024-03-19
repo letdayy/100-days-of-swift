@@ -50,11 +50,11 @@
             <objects>
                 <tableViewController id="4Ah-o0-nQT" customClass="CountryTableViewController" customModule="Projects13_15" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="9VX-ip-4CY">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Detail" textLabel="f6I-9o-nfR" detailTextLabel="q9d-eJ-0Jl" style="IBUITableViewCellStyleSubtitle" id="KdB-cc-TXg">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CountryDetail" textLabel="f6I-9o-nfR" detailTextLabel="q9d-eJ-0Jl" style="IBUITableViewCellStyleSubtitle" id="KdB-cc-TXg">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KdB-cc-TXg" id="Ncg-xA-5ax">
@@ -84,6 +84,7 @@
                             <outlet property="delegate" destination="4Ah-o0-nQT" id="peC-At-aYh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Z3a-W0-9AI"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lSi-fL-Nb6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -101,6 +102,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="f9h-p2-2GI" kind="relationship" relationship="rootViewController" id="EFG-mD-Nx3"/>
+                        <segue destination="4Ah-o0-nQT" kind="show" id="CAs-FV-h3M"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aV5-li-eRf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

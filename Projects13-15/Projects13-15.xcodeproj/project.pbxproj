@@ -16,6 +16,7 @@
 		B0048BA82BA4EF32001DC290 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0048BA72BA4EF32001DC290 /* Country.swift */; };
 		B0048BAC2BA4FA3E001DC290 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = B0048BAB2BA4FA3E001DC290 /* countries.json */; };
 		B0048BAE2BA4FB25001DC290 /* CountryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0048BAD2BA4FB25001DC290 /* CountryTableViewController.swift */; };
+		B0E0B9332BA9FB0B007FF5F6 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0B9322BA9FB0B007FF5F6 /* Countries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		B0048BA72BA4EF32001DC290 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		B0048BAB2BA4FA3E001DC290 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 		B0048BAD2BA4FB25001DC290 /* CountryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewController.swift; sourceTree = "<group>"; };
+		B0E0B9322BA9FB0B007FF5F6 /* Countries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				B0048B9E2BA4EBAA001DC290 /* LaunchScreen.storyboard */,
 				B0048BA12BA4EBAA001DC290 /* Info.plist */,
 				B0048BAB2BA4FA3E001DC290 /* countries.json */,
+				B0E0B9322BA9FB0B007FF5F6 /* Countries.swift */,
 			);
 			path = "Projects13-15";
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				B0048BA82BA4EF32001DC290 /* Country.swift in Sources */,
 				B0048B982BA4EBA9001DC290 /* ViewController.swift in Sources */,
 				B0048B942BA4EBA9001DC290 /* AppDelegate.swift in Sources */,
+				B0E0B9332BA9FB0B007FF5F6 /* Countries.swift in Sources */,
 				B0048B962BA4EBA9001DC290 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

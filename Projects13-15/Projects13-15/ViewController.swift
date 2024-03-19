@@ -17,16 +17,8 @@ class ViewController: UITableViewController {
         
         //carregar os dados JSON
         if let path = Bundle.main.path(forResource: "countries", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(filePath: path), options: .mappedIfSafe)
-                let decoder = JSONDecoder()
-                let result = try decoder.decode([Country].self, from: data)
-                self.countries = result
-                
-                //recarregar após ler os dados
-                tableView.reloadData()
-            } catch {
-                return
+            if let data = try? Data(contentsOf: URL(filePath: path), options: .mappedIfSafe) {
+                parse(json: data)
             }
         }
         
@@ -44,11 +36,28 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        /*tableView.deselectRow(at: indexPath, animated: true)
         let selectedCountry = countries[indexPath.row]
-        let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Detail") as! CountryTableViewController
+        let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CountryDetail") as! CountryTableViewController
         detailVC.country = selectedCountry
         navigationController?.pushViewController(detailVC, animated: true)
+         */
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedCountry = countries[indexPath.row]
+        let countryDetailVC = storyboard?.instantiateViewController(withIdentifier: "CountryDetail") as! CountryTableViewController
+        countryDetailVC.country = selectedCountry
+        
+        navigationController?.pushViewController(countryDetailVC, animated: true)
+    }
+    
+    func parse(json: Data) {
+        let decoder = JSONDecoder()
+        
+        if let jsonCountries = try? decoder.decode(Countries.self, from: json) {
+            countries = jsonCountries.countries
+            tableView.reloadData()
+        }
     }
 }
 
