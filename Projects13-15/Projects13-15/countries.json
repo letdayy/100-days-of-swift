@@ -1,0 +1,50 @@
+{
+  "countries": [
+    {
+      "name": "Brazil",
+      "capital": "Brasília",
+      "size": "8,515,767 km²",
+      "population": "213,993,437",
+      "currency": "Brazilian Real (BRL)",
+      "language": "Portuguese",
+      "continent": "South America"
+    },
+    {
+      "name": "United States",
+      "capital": "Washington, D.C.",
+      "size": "9,834,000 km²",
+      "population": "331,002,651",
+      "currency": "United States Dollar (USD)",
+      "language": "English",
+      "continent": "North America"
+    },
+    {
+      "name": "China",
+      "capital": "Beijing",
+      "size": "9,596,961 km²",
+      "population": "1,439,323,776",
+      "currency": "Renminbi (Yuan) (CNY)",
+      "language": "Mandarin",
+      "continent": "Asia"
+    },
+    {
+      "name": "Russia",
+      "capital": "Moscow",
+      "size": "17,125,200 km²",
+      "population": "145,934,462",
+      "currency": "Russian Ruble (RUB)",
+      "language": "Russian",
+      "continent": "Europe/Asia"
+    },
+    {
+      "name": "India",
+      "capital": "New Delhi",
+      "size": "3,287,263 km²",
+      "population": "1,380,004,385",
+      "currency": "Indian Rupee (INR)",
+      "language": "Hindi, English",
+      "continent": "Asia"
+    }
+  ]
+}
+
