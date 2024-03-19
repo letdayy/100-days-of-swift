@@ -24,6 +24,17 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Hx6-MB-eNK"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1F-TQ-tUV">
+                                <rect key="frame" x="333" y="89" width="36" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.92375274614256653" green="0.4735193513433239" blue="0.96611279250000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="+"/>
+                                <connections>
+                                    <action selector="mapTypeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WyL-N2-asZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -36,6 +47,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Cc3-rW-VyL"/>
                     <connections>
+                        <outlet property="mapTypeButton" destination="h1F-TQ-tUV" id="C0y-bH-m6H"/>
                         <outlet property="mapView" destination="9zq-Qz-BnG" id="JBX-jb-fxv"/>
                     </connections>
                 </viewController>
