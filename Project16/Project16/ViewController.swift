@@ -22,8 +22,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let paris = Capital(title: "Paris", coordinate: CLLocationCoordinate2D(latitude: 48.8567, longitude: 2.3508), info: "https://en.wikipedia.org/wiki/Paris")
         let rome = Capital(title: "Rome", coordinate: CLLocationCoordinate2D(latitude: 41.9, longitude: 12.5), info: "https://en.wikipedia.org/wiki/Rome")
         let washington = Capital(title: "Washington DC", coordinate: CLLocationCoordinate2D(latitude: 38.895111, longitude: -77.036667), info: "https://en.wikipedia.org/wiki/Washington,_D.C.")
+        let brasilia = Capital(title: "Brasilia", coordinate: CLLocationCoordinate2D(latitude: -15.7801, longitude: -47.9292), info: "https://en.wikipedia.org/wiki/Brasília")
         
-        mapView.addAnnotations([london, oslo, paris, rome, washington])
+        mapView.addAnnotations([london, oslo, paris, rome, washington, brasilia])
         
         //challenge 2
         mapTypeButton?.layer.cornerRadius = 10
