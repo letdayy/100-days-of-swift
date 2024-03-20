@@ -14,6 +14,8 @@
 		B0E620422BAB61A20066317F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E620402BAB61A20066317F /* Main.storyboard */; };
 		B0E620442BAB61A30066317F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0E620432BAB61A30066317F /* Assets.xcassets */; };
 		B0E620472BAB61A30066317F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E620452BAB61A30066317F /* LaunchScreen.storyboard */; };
+		B0E6204F2BAB62C40066317F /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = B0E6204D2BAB62C40066317F /* explosion.sks */; };
+		B0E620502BAB62C40066317F /* starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = B0E6204E2BAB62C40066317F /* starfield.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		B0E620412BAB61A20066317F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B0E620432BAB61A30066317F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0E620462BAB61A30066317F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B0E6204D2BAB62C40066317F /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
+		B0E6204E2BAB62C40066317F /* starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = starfield.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				B0E620402BAB61A20066317F /* Main.storyboard */,
 				B0E620432BAB61A30066317F /* Assets.xcassets */,
 				B0E620452BAB61A30066317F /* LaunchScreen.storyboard */,
+				B0E6204D2BAB62C40066317F /* explosion.sks */,
+				B0E6204E2BAB62C40066317F /* starfield.sks */,
 			);
 			path = Project17;
 			sourceTree = "<group>";
@@ -129,6 +135,8 @@
 				B0E620422BAB61A20066317F /* Main.storyboard in Resources */,
 				B0E620392BAB61A20066317F /* GameScene.sks in Resources */,
 				B0E620442BAB61A30066317F /* Assets.xcassets in Resources */,
+				B0E6204F2BAB62C40066317F /* explosion.sks in Resources */,
+				B0E620502BAB62C40066317F /* starfield.sks in Resources */,
 				B0E620472BAB61A30066317F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
