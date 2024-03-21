@@ -26,6 +26,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameOverLabel: SKLabelNode?
     var backButton: SKShapeNode?
     
+    //challenge 2
+    var enemyCount = 0
+    
     override func didMove(to view: SKView) {
         backgroundColor = .black
         
@@ -56,6 +59,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func createEnemy() {
+        //challenge 2
+        guard enemyCount < 20 else {
+            adjustTimerInterval()
+            enemyCount = 0
+            return
+        }
+        
+        enemyCount += 1
+        
         //challenge 3
         if !isGameOver {
             guard let enemy = possibleEnemies.randomElement() else { return }
@@ -73,18 +85,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    //challenge 2
+    func adjustTimerInterval() {
+        gameTimer?.invalidate()
+        
+        let newInterval = max(0.25, gameTimer?.timeInterval ?? 0.35 - 0.1)
+        gameTimer = Timer.scheduledTimer(timeInterval: newInterval, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+    }
+    
     
     override func update(_ currentTime: TimeInterval) {
         for node in children {
             if node.position.x < -300 {
                 node.removeFromParent()
             }
-        }
-        
-        if !isGameOver {
-            score += 1
-            backButton?.removeFromParent()
-            gameOverLabel?.removeFromParent()
         }
     }
     
@@ -126,7 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backButton?.fillColor = SKColor.black
         
         //adicionar texto no botão voltar
-        let backButtonText = SKLabelNode(text: "Voltar")
+        let backButtonText = SKLabelNode(text: "Back")
         backButtonText.fontName = "Chalkduster"
         backButtonText.fontSize = 20
         backButtonText.fontColor = SKColor.white
@@ -142,15 +156,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
-        if isGameOver && backButton?.contains(touchLocation) ?? false {
-            backButton?.removeFromParent()
-            backButton = nil
+        if let backButton = backButton, backButton.contains(touchLocation) {
+            backButton.removeFromParent()
             gameOverLabel?.removeFromParent()
-            gameOverLabel = nil
             
             isGameOver = false
             score = 0
-            
             
             addChild(player)
             player.position = CGPoint(x: 100, y: 384)
