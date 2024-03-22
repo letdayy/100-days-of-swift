@@ -22,6 +22,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isGameOver = false
     var gameTimer: Timer?
     
+    //extra
+    var gameOverLabel: SKLabelNode?
+    var backButton: SKShapeNode?
+    
+    //challenge 2
+    var enemyCount = 0
+    
     override func didMove(to view: SKView) {
         backgroundColor = .black
         
@@ -52,18 +59,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func createEnemy() {
-        guard let enemy = possibleEnemies.randomElement() else { return }
+        //challenge 2
+        guard enemyCount < 20 else {
+            adjustTimerInterval()
+            enemyCount = 0
+            return
+        }
         
-        let sprite = SKSpriteNode(imageNamed: enemy)
-        sprite.position = CGPoint(x: 1200, y: Int.random(in: 50...736))
-        addChild(sprite)
+        enemyCount += 1
         
-        sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
-        sprite.physicsBody?.categoryBitMask = 1
-        sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
-        sprite.physicsBody?.angularVelocity = 5
-        sprite.physicsBody?.linearDamping = 0
-        sprite.physicsBody?.angularDamping = 0
+        //challenge 3
+        if !isGameOver {
+            guard let enemy = possibleEnemies.randomElement() else { return }
+            
+            let sprite = SKSpriteNode(imageNamed: enemy)
+            sprite.position = CGPoint(x: 1200, y: Int.random(in: 50...736))
+            addChild(sprite)
+            
+            sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
+            sprite.physicsBody?.categoryBitMask = 1
+            sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
+            sprite.physicsBody?.angularVelocity = 5
+            sprite.physicsBody?.linearDamping = 0
+            sprite.physicsBody?.angularDamping = 0
+        }
+    }
+    
+    //challenge 2
+    func adjustTimerInterval() {
+        gameTimer?.invalidate()
+        
+        let newInterval = max(0.25, gameTimer?.timeInterval ?? 0.35 - 0.1)
+        gameTimer = Timer.scheduledTimer(timeInterval: newInterval, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
     
     
@@ -72,10 +99,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if node.position.x < -300 {
                 node.removeFromParent()
             }
-        }
-        
-        if !isGameOver {
-            score += 1
         }
     }
     
@@ -100,5 +123,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
         
         isGameOver = true
+        
+        gameOverLabel = SKLabelNode(text: "Game Over")
+        gameOverLabel?.fontName = "Chalkduster"
+        gameOverLabel?.fontSize = 50
+        gameOverLabel?.position = CGPoint(x: size.width/2, y: size.width/2)
+        
+        if let gameOverLabel = gameOverLabel {
+            addChild(gameOverLabel)
+        }
+        
+        //botão voltar
+        let backButtonSize = CGSize(width: 200, height: 50)
+        backButton = SKShapeNode(rectOf: backButtonSize, cornerRadius: 10)
+        backButton?.position = CGPoint(x: size.width/2, y: size.height/2 - 50)
+        backButton?.fillColor = SKColor.black
+        
+        //adicionar texto no botão voltar
+        let backButtonText = SKLabelNode(text: "Back")
+        backButtonText.fontName = "Chalkduster"
+        backButtonText.fontSize = 20
+        backButtonText.fontColor = SKColor.white
+        backButtonText.position = CGPoint(x: 0, y: -10)
+        backButton?.addChild(backButtonText)
+        
+        if let backButton = backButton {
+            addChild(backButton)
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let touchLocation = touch.location(in: self)
+        
+        if let backButton = backButton, backButton.contains(touchLocation) {
+            backButton.removeFromParent()
+            gameOverLabel?.removeFromParent()
+            
+            isGameOver = false
+            score = 0
+            
+            addChild(player)
+            player.position = CGPoint(x: 100, y: 384)
+        }
     }
 }
