@@ -23,9 +23,9 @@ class GameScene: SKScene {
         createLines(position: CGPoint(x: size.width / 2, y: size.height * 0.75))
         
         
-        createTargets(atYPosition: size.height * 0.25)
-        createTargets(atYPosition: size.height * 0.5)
-        createTargets(atYPosition: size.height * 0.75)
+        createTargets(atYPosition: size.height * 0.25, sizeTarget: CGSize(width: 50, height: 50))
+        createTargets(atYPosition: size.height * 0.5, sizeTarget: CGSize(width: 100, height: 100))
+        createTargets(atYPosition: size.height * 0.75, sizeTarget: CGSize(width: 25, height: 25))
     }
     
     func createLines(position : CGPoint) {
@@ -35,9 +35,9 @@ class GameScene: SKScene {
         addChild(line)
     }
     
-    func createTargets(atYPosition yPosition: CGFloat) {
+    func createTargets(atYPosition yPosition: CGFloat, sizeTarget: CGSize) {
         let target = SKSpriteNode(imageNamed: "target")
-        target.size = CGSize(width: 50, height: 50)
+        target.size = sizeTarget
         
         let initialX = size.width + target.size.width / 2
         let initialY = yPosition
