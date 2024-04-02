@@ -24,6 +24,10 @@ class GameScene: SKScene {
         }
     }
     
+    //challenge 2
+    var fireworksCount = 0
+    var gameOver = false
+    
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 512, y: 384)
@@ -39,9 +43,21 @@ class GameScene: SKScene {
         scoreLabel.horizontalAlignmentMode = .right
         scoreLabel.position = CGPoint(x: 980, y: 700)
         addChild(scoreLabel)
+        
+        print(fireworksCount)
     }
     
     func createFirework(xMovement: CGFloat, x: Int, y: Int) {
+        //challenge 2
+        guard !gameOver else { return }
+        
+        fireworksCount += 1
+        
+        if fireworksCount > 25 {
+            finishGame()
+            return
+        }
+        
         let node = SKNode()
         node.position = CGPoint(x: x, y: y)
         
@@ -197,5 +213,14 @@ class GameScene: SKScene {
         default:
             score += 4000
         }
+    }
+    
+    //challenge 2
+    func finishGame() {
+        gameTimer?.invalidate()
+        gameOver = true
+        fireworksCount = 0
+        scoreLabel.horizontalAlignmentMode = .center
+        scoreLabel.position = CGPoint(x: 512, y: 384)
     }
 }
