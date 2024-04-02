@@ -15,9 +15,12 @@ class GameScene: SKScene {
     let bottomEdge = -22
     let rightEdge = 1024 + 22
     
+    //challenge 1
+    var scoreLabel: SKLabelNode!
+    
     var score = 0 {
         didSet {
-            //code here
+            scoreLabel.text = "Score: \(score)"
         }
     }
     
@@ -29,6 +32,13 @@ class GameScene: SKScene {
         addChild(background)
         
         gameTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(launchFireworks), userInfo: nil, repeats: true)
+        
+        //challenge 1
+        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel.text = "Score: 0"
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.position = CGPoint(x: 980, y: 700)
+        addChild(scoreLabel)
     }
     
     func createFirework(xMovement: CGFloat, x: Int, y: Int) {
