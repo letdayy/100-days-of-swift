@@ -180,6 +180,14 @@ class GameScene: SKScene {
         if let emitter = SKEmitterNode(fileNamed: "explode") {
             emitter.position = firework.position
             addChild(emitter)
+            
+            //challenge 3
+            let duration = emitter.particleLifetime + emitter.particleLifetimeRange / 2.0
+            
+            emitter.run(SKAction.sequence([
+                SKAction.wait(forDuration: TimeInterval(duration)),
+                SKAction.removeFromParent()
+            ]))
         }
         
         firework.removeFromParent()
