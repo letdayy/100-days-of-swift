@@ -59,7 +59,10 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         center.delegate = self
         
         let show = UNNotificationAction(identifier: "show", title: "Tell me more...", options: .foreground)
-        let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [])
+        //challenge 2
+        let remindMeLater = UNNotificationAction(identifier: "remindMeLater", title: "Remind me later...")
+        
+        let category = UNNotificationCategory(identifier: "alarm", actions: [show, remindMeLater], intentIdentifiers: [])
         
         center.setNotificationCategories([category])
     }
@@ -73,9 +76,24 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
                 print("Default indetifier")
+                //challenge 1
+                let ac = UIAlertController(title: "Default identifier", message: nil, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
                 
             case "show":
                 print("Show more information...")
+                //challenge 1
+                let ac = UIAlertController(title: "Show more information", message: nil, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+                
+            //challenge 2
+            case "remindMeLater":
+                print("Remind me later")
+                DispatchQueue.global().asyncAfter(deadline: .now() + 86400) {
+                    self.scheduleLocal()
+                    }
                 
             default:
                 break
