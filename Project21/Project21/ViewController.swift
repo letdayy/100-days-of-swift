@@ -9,6 +9,8 @@ import UserNotifications
 import UIKit
 
 class ViewController: UIViewController, UNUserNotificationCenterDelegate {
+    let center = UNUserNotificationCenter.current()
+    let content = UNMutableNotificationContent()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +20,6 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
 
     @objc func registerLocal() {
-        let center = UNUserNotificationCenter.current()
         
         center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {
             (granted, error) in
@@ -33,10 +34,8 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @objc func scheduleLocal() {
         registerCategories()
         
-        let center = UNUserNotificationCenter.current()
         center.removeAllPendingNotificationRequests()
         
-        let content = UNMutableNotificationContent()
         content.title = "Late wake up all"
         content.body = "The early bird catches the worm, but the second mmouse gets the cheese."
         content.categoryIdentifier = "alarm"
@@ -55,7 +54,6 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func registerCategories() {
-        let center = UNUserNotificationCenter.current()
         center.delegate = self
         
         let show = UNNotificationAction(identifier: "show", title: "Tell me more...", options: .foreground)
@@ -91,15 +89,36 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
             //challenge 2
             case "remindMeLater":
                 print("Remind me later")
-                DispatchQueue.global().asyncAfter(deadline: .now() + 86400) {
-                    self.scheduleLocal()
-                    }
+                scheduleRemember()
                 
             default:
                 break
             }
             
             completionHandler()
+        }
+        
+        //challenge 2
+        func scheduleRemember() {
+            let content = UNMutableNotificationContent()
+            content.title = "Late wake up call"
+            content.body = "The early bird catches the worm, but the second mouse gets the cheese"
+            content.categoryIdentifier = "alarm"
+            content.sound = UNNotificationSound.default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            
+            center.add(request) { error in
+                if let error = error {
+                    print("error: \(error)")
+                }
+            }
+        }
+        
+        func scheduleNotification(with content: UNMutableNotificationContent, timeInterval: TimeInterval) {
+            
         }
     }
 

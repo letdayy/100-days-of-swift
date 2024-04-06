@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ViewController: UIViewController {
+    let center = UNUserNotificationCenter.current()
     
     //chamando os botões
     @IBOutlet weak var button1: UIButton!
@@ -22,6 +24,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scheduleNotications()
         
 
         //colocando uma borda nas bandeiras
@@ -111,6 +115,21 @@ class ViewController: UIViewController {
         present(ac, animated: true)
         
        
+    }
+    
+    //challenge 3 project 21
+    func scheduleNotications() {
+        center.removeAllPendingNotificationRequests()
+        
+        for i in 1...7 {
+            let content = UNMutableNotificationContent()
+            content.title = "Reminder"
+            content.body = "Don't forget to play today!"
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(60 * 60 * 24 * i), repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "dailyReminder\(i)", content: content, trigger: trigger)
+        }
     }
     
     
