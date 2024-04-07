@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scheduleNotications()
+        registerLocal()
         
 
         //colocando uma borda nas bandeiras
@@ -118,17 +118,46 @@ class ViewController: UIViewController {
     }
     
     //challenge 3 project 21
+    @objc func registerLocal() {
+        center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {
+            (granted, error) in
+            if granted {
+                print("yes!")
+                self.scheduleNotications()
+            } else {
+                print("no :/")
+            }
+        })
+    }
+    
     func scheduleNotications() {
         center.removeAllPendingNotificationRequests()
         
-        for i in 1...7 {
+        let daysOfWeek = 7
+        let notificationTimeInterval: TimeInterval = 60 * 60 * 24
+        
+        for day in 0..<daysOfWeek {
             let content = UNMutableNotificationContent()
             content.title = "Reminder"
             content.body = "Don't forget to play today!"
+            content.sound = UNNotificationSound.default
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(60 * 60 * 24 * i), repeats: false)
+            let timeInterval = notificationTimeInterval * Double(day + 1)
             
-            let request = UNNotificationRequest(identifier: "dailyReminder\(i)", content: content, trigger: trigger)
+            
+            let triggerDate = Calendar.current.date(byAdding: .second, value: Int(timeInterval), to: Date())!
+            let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: triggerDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            
+            center.add(request) { error in
+                if let error = error {
+                    print("Error \(error)")
+                } else {
+                    print("Notification scheduled successfully")
+                }
+            }
         }
     }
     
