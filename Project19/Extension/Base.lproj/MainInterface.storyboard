@@ -16,8 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gr8-1C-C12">
-                                <rect key="frame" x="40" y="185" width="240" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gr8-1C-C12">
+                                <rect key="frame" x="0.0" y="177" width="320" height="175"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -26,12 +27,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VVe-Uw-JpX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="gr8-1C-C12" firstAttribute="centerX" secondItem="zMn-AG-sqS" secondAttribute="centerX" id="Dpp-k3-SoQ"/>
-                            <constraint firstItem="gr8-1C-C12" firstAttribute="leading" secondItem="VVe-Uw-JpX" secondAttribute="leading" constant="40" id="IKh-Qa-LM5"/>
-                            <constraint firstItem="gr8-1C-C12" firstAttribute="top" secondItem="VVe-Uw-JpX" secondAttribute="top" constant="82" id="igW-39-uzN"/>
-                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="bottom" secondItem="gr8-1C-C12" secondAttribute="bottom" constant="181" id="pqw-xX-Drq"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="e43-oN-NjV"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
