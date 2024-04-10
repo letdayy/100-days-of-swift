@@ -44,21 +44,6 @@ class ActionViewController: UIViewController {
             }
         }
     }
-
-    @IBAction func done() {
-        // Return any edited content to the host app.
-        // This template doesn't do anything, so we just echo the passed in items.
-        self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
-        
-        //retornar texto digitado pelo usuário:
-        let item = NSExtensionItem()
-        let argument: NSDictionary = ["customJavaScript": script.text ?? ""]
-        let webDictionary: NSDictionary = [NSExtensionJavaScriptFinalizeArgumentKey: argument]
-        let customJavaScript = NSItemProvider(item: webDictionary, typeIdentifier: UTType.propertyList.identifier as String)
-        item.attachments = [customJavaScript]
-        
-        extensionContext?.completeRequest(returningItems: [item])
-    }
     
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -81,15 +66,29 @@ class ActionViewController: UIViewController {
     //challenge 1
     @objc func selectScript() {
         let ac = UIAlertController(title: "Select script", message: nil, preferredStyle: .actionSheet)
-        let scripts = ["script 1", "script 2", "script 3"]
+        let scripts = ["alert(document.title);", "document.body.style.backgroundColor = 'lightblue';", "var newElement = document.createElement('p'); newElement.innerText = 'Novo parágrafo aqui'; document.body.appendChild(newElement);"]
         
         for scriptTitle in scripts {
             ac.addAction(UIAlertAction(title: scriptTitle, style: .default) { [weak self] _ in
                 self?.script.text = scriptTitle
+                self?.done()
             })
                 }
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             
             present(ac, animated: true)
     }
 
+    @IBAction func done() {
+        self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
+        
+        //retornar texto digitado pelo usuário:
+        let item = NSExtensionItem()
+        let argument: NSDictionary = ["customJavaScript": script.text ?? ""]
+        let webDictionary: NSDictionary = [NSExtensionJavaScriptFinalizeArgumentKey: argument]
+        let customJavaScript = NSItemProvider(item: webDictionary, typeIdentifier: UTType.propertyList.identifier as String)
+        item.attachments = [customJavaScript]
+        
+        extensionContext?.completeRequest(returningItems: [item])
+    }
 }
