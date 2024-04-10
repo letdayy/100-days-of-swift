@@ -23,6 +23,10 @@ class ActionViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        
+        //challenge 1
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Select Script", style: .plain, target: self, action: #selector(selectScript))
+        
     
         if let inputItem = extensionContext?.inputItems.first as? NSExtensionItem {
             if let itemProvider = inputItem.attachments?.first {
@@ -72,6 +76,20 @@ class ActionViewController: UIViewController {
         
         let selectedRange = script.selectedRange
         script.scrollRangeToVisible(selectedRange)
+    }
+    
+    //challenge 1
+    @objc func selectScript() {
+        let ac = UIAlertController(title: "Select script", message: nil, preferredStyle: .actionSheet)
+        let scripts = ["script 1", "script 2", "script 3"]
+        
+        for scriptTitle in scripts {
+            ac.addAction(UIAlertAction(title: scriptTitle, style: .default) { [weak self] _ in
+                self?.script.text = scriptTitle
+            })
+                }
+            
+            present(ac, animated: true)
     }
 
 }
