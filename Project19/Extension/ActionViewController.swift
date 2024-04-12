@@ -27,6 +27,10 @@ class ActionViewController: UIViewController {
         //challenge 1
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Select Script", style: .plain, target: self, action: #selector(selectScript))
         
+        //challenge 2, para ler o script salvo na página
+        if let url = URL(string: pageURL), let savedScript = UserDefaults.standard.string(forKey: url.host ?? "") {
+            script.text = savedScript
+        }
     
         if let inputItem = extensionContext?.inputItems.first as? NSExtensionItem {
             if let itemProvider = inputItem.attachments?.first {
@@ -71,6 +75,7 @@ class ActionViewController: UIViewController {
         for scriptTitle in scripts {
             ac.addAction(UIAlertAction(title: scriptTitle, style: .default) { [weak self] _ in
                 self?.script.text = scriptTitle
+                self?.saveScript()
                 self?.done()
             })
                 }
@@ -90,5 +95,12 @@ class ActionViewController: UIViewController {
         item.attachments = [customJavaScript]
         
         extensionContext?.completeRequest(returningItems: [item])
+    }
+    
+    //challenge 2, para salvar o script com UserDefaults
+    func saveScript() {
+        if let url = URL(string: pageURL) {
+            UserDefaults.standard.setValue(script.text, forKey: url.host ?? "")
+        }
     }
 }
