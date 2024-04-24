@@ -43,6 +43,22 @@ class GameScene: SKScene {
         case never, always, random
     }
     
+    //challenge 1
+    let bombType = 0
+    let penguinType = 1
+    let enemyPositionXRange = 64...960
+    let enemyPositionY = -128
+    let enemyVelocityX: [(CGFloat, ClosedRange<Int>)] = [
+        (maxPosition: 256, range: 8...15),
+        (maxPosition: 512, range: 3...5),
+        (maxPosition: 768, range: -5...(-3)),
+        (maxPosition: 256, range: -15...(-8))
+    ]
+    let enemyVelocityYRange = 24...32
+    let enemyVelocityMultiplier = 40
+    let enemyAngularVelocityRange: ClosedRange<CGFloat> = -3...3
+    
+    
     
     
     override func didMove(to view: SKView) {
@@ -153,12 +169,12 @@ class GameScene: SKScene {
         var enemyType = Int.random(in: 0...6)
         
         if forceBomb == .never {
-            enemyType = 1
+            enemyType = penguinType
         } else if forceBomb == .always {
-            enemyType = 0
+            enemyType = bombType
         }
         
-        if enemyType == 0 {
+        if enemyType == bombType {
             enemy = SKSpriteNode()
             enemy.zPosition = 1
             enemy.name = "bombContainer"
@@ -190,26 +206,24 @@ class GameScene: SKScene {
             enemy.name = "enemy"
         }
         
-        let randomPosition = CGPoint(x: Int.random(in: 64...960), y: -128)
+        //challenge 1
+        let randomPosition = CGPoint(x: Int.random(in: enemyPositionXRange), y: enemyPositionY)
         enemy.position = randomPosition
         
-        let randomAngularVelocity = CGFloat.random(in: -3...3)
-        let randomXVelocity: Int
+        let randomAngularVelocity = CGFloat.random(in: enemyAngularVelocityRange)
+        var randomXVelocity: Int = 1
         
-        if randomPosition.x < 256 {
-            randomXVelocity = Int.random(in: 8...15)
-        } else if randomPosition.x < 512 {
-            randomXVelocity = Int.random(in: 3...5)
-        } else if randomPosition.x < 768 {
-            randomXVelocity = -Int.random(in: 3...5)
-        } else {
-            randomXVelocity = -Int.random(in: 8...15)
+        for (maxPosition, range) in enemyVelocityX {
+            if randomPosition.x < maxPosition {
+                randomXVelocity = Int.random(in: range)
+                break
+            }
         }
         
-        let randomYVelocity = Int.random(in: 24...32)
+        let randomYVelocity = Int.random(in: enemyVelocityYRange)
         
         enemy.physicsBody = SKPhysicsBody(circleOfRadius: 64)
-        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * 40, dy: randomYVelocity * 40)
+        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * enemyVelocityMultiplier, dy: randomYVelocity * enemyVelocityMultiplier)
         enemy.physicsBody?.angularVelocity = randomAngularVelocity
         enemy.physicsBody?.collisionBitMask = 0
         
