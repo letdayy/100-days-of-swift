@@ -55,10 +55,11 @@ class GameScene: SKScene {
         (maxPosition: 256, range: -15...(-8))
     ]
     let enemyVelocityYRange = 24...32
-    let enemyVelocityMultiplier = 40
     let enemyAngularVelocityRange: ClosedRange<CGFloat> = -3...3
+    let enemyVelocityMultiplier = 40
     
-    
+    //challenge 2
+    let fastEnemyVelocityMultiplier = 50
     
     
     override func didMove(to view: SKView) {
@@ -166,7 +167,8 @@ class GameScene: SKScene {
     func createEnemy(forceBomb: ForceBomb = .random) {
         let enemy: SKSpriteNode
         
-        var enemyType = Int.random(in: 0...6)
+        //challenge 2
+        var enemyType = Int.random(in: 0...7) // acrescentei mais um para ser o inimigo mais rápido
         
         if forceBomb == .never {
             enemyType = penguinType
@@ -200,6 +202,11 @@ class GameScene: SKScene {
                 enemy.addChild(emitter)
             }
             
+        } else if enemyType == 7 {
+            //challenge 2
+            enemy = SKSpriteNode(imageNamed: "fastpenguin")
+            run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
+            enemy.name = "fastenemy"
         } else {
             enemy = SKSpriteNode(imageNamed: "penguin")
             run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
@@ -223,7 +230,9 @@ class GameScene: SKScene {
         let randomYVelocity = Int.random(in: enemyVelocityYRange)
         
         enemy.physicsBody = SKPhysicsBody(circleOfRadius: 64)
-        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * enemyVelocityMultiplier, dy: randomYVelocity * enemyVelocityMultiplier)
+        //challenge 2
+        let multiplier = enemyType == 7 ? fastEnemyVelocityMultiplier : enemyVelocityMultiplier
+        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * multiplier, dy: randomYVelocity * multiplier)
         enemy.physicsBody?.angularVelocity = randomAngularVelocity
         enemy.physicsBody?.collisionBitMask = 0
         
@@ -347,7 +356,11 @@ class GameScene: SKScene {
         let nodesAtPoint = nodes(at: location)
         
         for case let node as SKSpriteNode in nodesAtPoint {
-            if node.name == "enemy" {
+            if node.name == "fastenemy" {
+                score += 4
+            }
+            
+            if node.name == "enemy" || node.name == "fastenemy"{
                 if let emitter = SKEmitterNode(fileNamed: "sliceHitEnemy") {
                     emitter.position = node.position
                     addChild(emitter)
@@ -448,7 +461,8 @@ class GameScene: SKScene {
                         
                         node.removeFromParent()
                         activeEnemies.remove(at: index)
-                    } else if node.name == "bombContainer" {
+                        //challenge 2, coloquei aqui pois esses inimigos rápidos não fazem perder vida
+                    } else if node.name == "bombContainer" || node.name == "fastenemy"{
                         node.name = ""
                         node.removeFromParent()
                         activeEnemies.remove(at: index)
