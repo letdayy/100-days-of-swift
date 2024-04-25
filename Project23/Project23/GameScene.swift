@@ -428,7 +428,7 @@ class GameScene: SKScene {
         let nodesAtPoint = nodes(at: location)
         
         for case let node as SKSpriteNode in nodesAtPoint {
-            if node.name == "fastenem y" {
+            if node.name == "fastenemy" {
                 score += 4
             }
             
