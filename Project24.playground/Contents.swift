@@ -86,3 +86,36 @@ attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), rang
 attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 8, length: 1))
 attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 32), range: NSRange(location: 10, length: 4))
 attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: NSRange(location: 15, length: 6))
+
+
+//challenge 1
+extension String {
+    func withPrefix(_ prefix: String) -> String {
+        guard !self.hasPrefix(prefix) else { return self }
+        return prefix + self
+    }
+}
+
+print("test".withPrefix("te") == "test")
+print("pet".withPrefix("car") == "carpet")
+
+//challenge 2
+extension String {
+    var isNumeric: Bool {
+        return self.rangeOfCharacter(from: .decimalDigits) != nil
+    }
+}
+
+print("1234".isNumeric == true)
+print("n43".isNumeric == true)
+print("hello".isNumeric == false)
+
+
+//challenge 3
+extension String {
+    var lines: [String] {
+        return self.components(separatedBy: "\n")
+    }
+}
+
+print("this\nis\na\ntest".lines)
