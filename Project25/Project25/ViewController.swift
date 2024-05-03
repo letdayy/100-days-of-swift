@@ -10,31 +10,48 @@ import UIKit
 
 class ViewController: UICollectionViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        <#code#>
+        dismiss(animated: true)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        <#code#>
+        dismiss(animated: true)
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        <#code#>
+        switch state {
+        case .connected:
+            print("Connected: \(peerID.displayName)")
+            
+        case .connecting:
+            print("Connecting: \(peerID.displayName)")
+            
+        case .notConnected:
+            print("Not Connected: \(peerID.displayName)")
+        @unknown default:
+            print("Unknown state received: \(peerID.displayName)")
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        <#code#>
+        DispatchQueue.main.async { [weak self] in
+            if let image = UIImage(data: data) {
+                self?.images.insert(image, at: 0)
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
+    //métodos vazios
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        <#code#>
+        
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        <#code#>
+        
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: (any Error)?) {
-        <#code#>
+        
     }
     
     
@@ -70,6 +87,20 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         
         images.insert(image, at: 0)
         collectionView.reloadData()
+        
+        guard let mcSession = mcSession else { return }
+        
+        if mcSession.connectedPeers.count > 0 {
+            if let imageData = image.pngData() {
+                do {
+                    try mcSession.send(imageData, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch {
+                    let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    present(ac, animated: true)
+                }
+            }
+        }
     }
     
     @objc func showConnectionPrompt() {
