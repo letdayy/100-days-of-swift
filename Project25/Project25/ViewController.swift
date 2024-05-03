@@ -52,7 +52,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
         
-        mcSession = mcSession(MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required))
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession?.delegate = self
     }
     
@@ -80,13 +80,13 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         present(ac, animated: true)
     }
     
-    func startHosting() {
+    func startHosting(action: UIAlertAction) {
         guard let mcSession = mcSession else { return }
-        mcAdvertiserAssistant = mcAdvertiserAssistant(serviceType: "hws-project25", discoveryInfo: nil, session: mcSession)
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-project25", discoveryInfo: nil, session: mcSession)
         mcAdvertiserAssistant?.start()
     }
     
-    func joinSession() {
+    func joinSession(action: UIAlertAction) {
         guard let mcSession = mcSession else { return }
         let mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session: mcSession)
         mcBrowser.delegate = self
