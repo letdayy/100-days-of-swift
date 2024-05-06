@@ -9,6 +9,12 @@ import MultipeerConnectivity
 import UIKit
 
 class ViewController: UICollectionViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
+    var images = [UIImage]()
+    
+    var peerID = MCPeerID(displayName: UIDevice.current.name)
+    var mcSession: MCSession?
+    var mcAdvertiserAssistant: MCAdvertiserAssistant?
+    
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true)
     }
@@ -53,13 +59,6 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: (any Error)?) {
         
     }
-    
-    
-    var images = [UIImage]()
-    
-    var peerID = MCPeerID(displayName: UIDevice.current.name)
-    var mcSession: MCSession?
-    var mcAdvertiserAssistant: MCAdvertiserAssistant?
 
     override func viewDidLoad() {
         super.viewDidLoad()
