@@ -9,6 +9,8 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    var player: SKSpriteNode!
+    
     enum CollisionTypes: UInt32 {
         case player = 1
         case wall = 2
@@ -25,6 +27,9 @@ class GameScene: SKScene {
         addChild(background)
         
         loadLevel()
+        createPlayer()
+        
+        physicsWorld.gravity = .zero
         
     }
     
@@ -95,6 +100,19 @@ class GameScene: SKScene {
                 }
             }
         }
+    }
+    
+    func createPlayer() {
+        player = SKSpriteNode(imageNamed: "player")
+        player.position = CGPoint(x: 96, y: 672)
+        player.zPosition = 1
+        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)
+        player.physicsBody?.allowsRotation = false
+        player.physicsBody?.linearDamping = 0.5
         
+        player.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue
+        player.physicsBody?.contactTestBitMask = CollisionTypes.star.rawValue | CollisionTypes.vortex.rawValue | CollisionTypes.finish.rawValue
+        player.physicsBody?.collisionBitMask = CollisionTypes.wall.rawValue
+        addChild(player)
     }
 }
