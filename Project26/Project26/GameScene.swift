@@ -25,11 +25,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //challenge 2
     var ended: Int = 0
     
+    //challenge 3
+    var blackHoles = [CGPoint]()
+    
     enum CollisionTypes: UInt32 {
         case player = 1
         case wall = 2
         case star = 4
         case vortex = 8
+        case blackhole = 12
         case finish = 16
     }
     
@@ -75,7 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.run(SKAction.repeatForever(SKAction.rotate(byAngle: .pi, duration: 1)))
         }
         
-        if node.name == "star" || node.name == "vortex" || node.name == "finish" {
+        if node.name == "star" || node.name == "vortex" || node.name == "finish" || node.name == "blackhole" {
             node.physicsBody?.collisionBitMask = 0
             node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
         }
@@ -111,6 +115,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let node = SKSpriteNode(imageNamed: "finish")
                     typesOfNodes(node: node, name: "finish", physicsBody: SKPhysicsBody(circleOfRadius: node.size.width / 2), categoryBitMask: CollisionTypes.player.rawValue, position: position)
                     
+                } else if letter == "b" {
+                    //challenge 3
+                    createBlackHole(name: "blackhole", position: position)
                 } else if letter == " " {
                     // do nothing!
                 } else {
@@ -118,6 +125,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+    }
+    
+    //challenge 3
+    func createBlackHole(name: String, position: CGPoint) {
+        let node = SKShapeNode(circleOfRadius: 25)
+        node.fillColor = .black
+        node.name = name
+        node.position = position
+        node.physicsBody =  SKPhysicsBody(circleOfRadius: 25)
+        node.physicsBody?.categoryBitMask = CollisionTypes.blackhole.rawValue
+        node.physicsBody?.isDynamic = false
+        addChild(node)
+        blackHoles.append(position)
     }
     
     func createPlayer() {
@@ -150,6 +170,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.run(sequence) { [weak self] in
                 self?.createPlayer()
                 self?.isGameOver = false
+            }
+        }  else if node.name == "blackhole" {
+            //challenge 3
+            if let playerPosition = player.position as? CGPoint, let otherBlackHole = blackHoles.first(where: { $0 != node.position }) {
+                player.position = otherBlackHole
             }
         } else if node.name == "star" {
             node.removeFromParent()
