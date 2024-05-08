@@ -7,6 +7,7 @@
 
 import CoreMotion
 import SpriteKit
+import UIKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -21,6 +22,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    
+    //challenge 2
+    var ended: Int = 0
     
     enum CollisionTypes: UInt32 {
         case player = 1
@@ -44,7 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.zPosition = 2
         addChild(scoreLabel)
         
-        loadLevel()
+        loadLevel(level: "level1")
         createPlayer()
         
         physicsWorld.gravity = .zero
@@ -74,8 +78,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func loadLevel() {
-        guard let levelURL = Bundle.main.url(forResource: "level1", withExtension: "txt") else {
+    func loadLevel(level: String) {
+        guard let levelURL = Bundle.main.url(forResource: "\(level)", withExtension: "txt") else {
             fatalError("Could not find level1.txt in the app bundle.")
         }
         guard let levelString = try? String(contentsOf: levelURL) else {
@@ -87,7 +91,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for (row, line) in lines.reversed().enumerated() {
             for (column, letter) in line.enumerated() {
                 let position = CGPoint(x: (64 * column) + 32, y: (64 * row) + 32)
-                
+                //challenge 1
                 if letter == "x" {
                     let node = SKSpriteNode(imageNamed: "block")
                     typesOfNodes(node: node, name: "", physicsBody: SKPhysicsBody(rectangleOf:  node.size), categoryBitMask: CollisionTypes.wall.rawValue, position: position)
@@ -146,9 +150,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.removeFromParent()
             score += 1
         } else if node.name == "finish" {
-            // next level
+            //challenge 2
+                removeAllChildren()
+                createPlayer()
+                loadLevel(level: "level2")
+                ended += 1
         }
     }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
