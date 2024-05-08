@@ -7,7 +7,6 @@
 
 import CoreMotion
 import SpriteKit
-import UIKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -35,19 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
-        let background = SKSpriteNode(imageNamed: "background")
-        background.position = CGPoint(x: 512, y: 384)
-        background.blendMode = .replace
-        background.zPosition = -1
-        addChild(background)
-        
-        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
-        scoreLabel.text = "Score: 0"
-        scoreLabel.horizontalAlignmentMode = .left
-        scoreLabel.position = CGPoint(x: 30, y: 30)
-        scoreLabel.zPosition = 2
-        addChild(scoreLabel)
-        
+        addBackgroundAndScore()
         loadLevel(level: "level1")
         createPlayer()
         
@@ -57,6 +44,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         motionManager = CMMotionManager()
         motionManager.startAccelerometerUpdates()
         
+    }
+    
+    //extra
+    func addBackgroundAndScore() {
+        let background = SKSpriteNode(imageNamed: "background")
+        background.position = CGPoint(x: 512, y: 384)
+        background.blendMode = .replace
+        background.zPosition = -1
+        addChild(background)
+        
+        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel.text = "Score: \(score)"
+        scoreLabel.horizontalAlignmentMode = .left
+        scoreLabel.position = CGPoint(x: 30, y: 30)
+        scoreLabel.zPosition = 2
+        addChild(scoreLabel)
     }
     
     //challenge 1
@@ -118,6 +121,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createPlayer() {
+        physicsWorld.gravity = .zero
+        
         player = SKSpriteNode(imageNamed: "player")
         player.position = CGPoint(x: 96, y: 672)
         player.zPosition = 1
@@ -155,6 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 createPlayer()
                 loadLevel(level: "level2")
                 ended += 1
+                addBackgroundAndScore()
         }
     }
 
