@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmM-bX-wci">
-                                <rect key="frame" x="370" y="1125" width="82" height="35"/>
+                                <rect key="frame" x="369" y="1125" width="82" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Redraw"/>
                                 <connections>
@@ -31,12 +31,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="xmM-bX-wci" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="370" id="3II-CQ-tfw"/>
-                            <constraint firstItem="nqI-uR-CAT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GPc-V5-rgr"/>
-                            <constraint firstItem="xmM-bX-wci" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="PfP-vk-RcB"/>
-                            <constraint firstItem="nqI-uR-CAT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="T7S-ST-gRl"/>
-                            <constraint firstItem="nqI-uR-CAT" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jyn-NZ-Pv1"/>
-                            <constraint firstItem="nqI-uR-CAT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-24" id="zsS-ns-LBy"/>
+                            <constraint firstItem="nqI-uR-CAT" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="E4i-XK-W0T"/>
+                            <constraint firstItem="nqI-uR-CAT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-24" id="EO7-tM-T9i"/>
+                            <constraint firstItem="xmM-bX-wci" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="UKW-54-nSr"/>
+                            <constraint firstItem="nqI-uR-CAT" firstAttribute="centerX" secondItem="xmM-bX-wci" secondAttribute="centerX" id="XNU-CC-Xaa"/>
+                            <constraint firstItem="nqI-uR-CAT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hvG-HS-z9H"/>
+                            <constraint firstItem="nqI-uR-CAT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uxW-oP-fMN"/>
                         </constraints>
                     </view>
                     <connections>
