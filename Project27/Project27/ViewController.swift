@@ -145,11 +145,59 @@ class ViewController: UIViewController {
         
         imageView.image = img
     }
+    
+    //challenge 1
+    func drawStar() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+        
+        let img = renderer.image { ctx in
+            let path = UIBezierPath()
+            path.move(to: CGPoint(x: 256, y: 0))
+            
+            let points = 5 // número de pontas da estrela
+            let starRadius: Double = min(512, 512) / 2.0
+            let angle = CGFloat.pi / CGFloat(points)
+            let rotation = -CGFloat.pi / 2.0
+            
+            var shouldMove = true
+            
+            for i in 1...(points * 2) {
+                let radius = i % 2 == 0 ? CGFloat(starRadius * 0.382) : CGFloat(starRadius)
+                let x = 256 + radius * CGFloat(cos(CGFloat(i) * angle + rotation))
+                let y = 256 + radius * CGFloat(sin(CGFloat(i) * angle + rotation))
+                path.addLine(to: CGPoint(x: x, y: y ))
+            }
+            
+            
+            
+            path.close()
+            
+            UIColor.yellow.setFill()
+            path.fill()
+            
+            UIColor.black.setStroke()
+            path.lineWidth = 2
+            path.stroke()
+        }
+        
+        imageView.image = img
+    }
+    
+    //challenge 2
+    func writeTwin() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+        
+        let img = renderer.image { ctx in
+            
+        }
+        
+        imageView.image = img
+    }
 
     @IBAction func redrawTapped(_ sender: Any) {
         currentDrawType += 1
         
-        if currentDrawType > 5 {
+        if currentDrawType > 6 {
             currentDrawType = 0
         }
         
@@ -171,6 +219,9 @@ class ViewController: UIViewController {
             
         case 5:
             drawImagesAndText()
+            
+        case 6:
+            drawStar()
             
         default:
             break
