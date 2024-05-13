@@ -185,20 +185,78 @@ class ViewController: UIViewController {
     }
     
     //challenge 2
-    func writeTwin() {
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+    func drawTwin() {
+        let imgWidth = 512
+        let imgHeight = 512
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: imgWidth, height: imgHeight))
+        
+        let height = 150
+        let spacing = 40
+        
+        let top: Int = (imgHeight - height) / 2
+        let bottom = top + height
+        
+        let width: Int = height * 2 / 3
+        
+        var startx = (imgWidth - (width + spacing + width + spacing + spacing + width)) / 2
         
         let img = renderer.image { ctx in
+            drawT(ctx: ctx.cgContext, top: top, bottom: bottom, startx: startx, width: width)
             
+            startx += width + spacing
+            drawW(ctx: ctx.cgContext, top: top, bottom: bottom, startx: startx, width: width)
+            
+            startx += width + spacing
+            drawI(ctx: ctx.cgContext, top: top, bottom: bottom, startx: startx, width: width)
+            
+            startx += spacing
+            drawN(ctx: ctx.cgContext, top: top, bottom: bottom, startx: startx, width: width)
+            
+            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
+            ctx.cgContext.setLineWidth(10)
+            ctx.cgContext.setLineJoin(.round)
+            ctx.cgContext.setLineCap(.round)
+            ctx.cgContext.drawPath(using: .stroke)
         }
         
         imageView.image = img
+    }
+    
+    //challenge 2
+    func drawT(ctx: CGContext, top: Int, bottom: Int, startx: Int, width: Int) {
+        ctx.move(to: CGPoint(x: startx, y: top))
+        ctx.addLine(to: CGPoint(x: startx + width, y: top))
+        ctx.move(to: CGPoint(x: startx + width / 2, y: top))
+        ctx.addLine(to: CGPoint(x: startx + width / 2, y: bottom))
+    }
+    
+    //challenge 2
+    func drawW(ctx: CGContext, top: Int, bottom: Int, startx: Int, width: Int) {
+        ctx.move(to: CGPoint(x: startx, y: top))
+        ctx.addLine(to: CGPoint(x: Double(startx) + Double(width) * 0.3, y: Double(bottom)))
+        ctx.addLine(to: CGPoint(x: Double(startx) + Double(width) * 0.5, y: Double(top + bottom) / 2))
+        ctx.addLine(to: CGPoint(x: Double(startx) + Double(width) * 0.7, y: Double(bottom)))
+        ctx.addLine(to: CGPoint(x: startx + width, y: top))
+    }
+    
+    //challenge 2
+    func drawI(ctx: CGContext, top: Int, bottom: Int, startx: Int, width: Int) {
+        ctx.move(to: CGPoint(x: startx, y: top))
+        ctx.addLine(to: CGPoint(x: startx, y: bottom))
+    }
+    
+    //challenge 2
+    func drawN(ctx: CGContext, top: Int, bottom: Int, startx: Int, width: Int) {
+        ctx.move(to: CGPoint(x: startx, y: bottom))
+        ctx.addLine(to: CGPoint(x: startx, y: top))
+        ctx.addLine(to: CGPoint(x: startx + width, y: bottom))
+        ctx.addLine(to: CGPoint(x: startx + width, y: top))
     }
 
     @IBAction func redrawTapped(_ sender: Any) {
         currentDrawType += 1
         
-        if currentDrawType > 6 {
+        if currentDrawType > 7 {
             currentDrawType = 0
         }
         
@@ -223,6 +281,9 @@ class ViewController: UIViewController {
             
         case 6:
             drawStar()
+            
+        case 7:
+            drawTwin()
             
         default:
             break
