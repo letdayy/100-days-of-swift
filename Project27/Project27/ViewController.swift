@@ -151,33 +151,34 @@ class ViewController: UIViewController {
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
         
         let img = renderer.image { ctx in
-            let path = UIBezierPath()
-            path.move(to: CGPoint(x: 256, y: 0))
+            ctx.cgContext.translateBy(x: 256, y: 256)
             
-            let points = 5 // número de pontas da estrela
-            let starRadius: Double = min(512, 512) / 2.0
-            let angle = CGFloat.pi / CGFloat(points)
-            let rotation = -CGFloat.pi / 2.0
+            let points = 5
+            let outerRadius = CGFloat(256)
+            let innerRadius = outerRadius / 2.5
             
-            var shouldMove = true
+            let angle = CGFloat(2 * Double.pi) / CGFloat(points)
+            var theta: CGFloat = -CGFloat(Double.pi / 2)
+            var first = true
             
-            for i in 1...(points * 2) {
-                let radius = i % 2 == 0 ? CGFloat(starRadius * 0.382) : CGFloat(starRadius)
-                let x = 256 + radius * CGFloat(cos(CGFloat(i) * angle + rotation))
-                let y = 256 + radius * CGFloat(sin(CGFloat(i) * angle + rotation))
-                path.addLine(to: CGPoint(x: x, y: y ))
+            for _ in 0..<points {
+                if first {
+                    ctx.cgContext.move(to: CGPoint(x: outerRadius * cos(theta), y: outerRadius * sin(theta)))
+                    first = false
+                } else {
+                    ctx.cgContext.addLine(to: CGPoint(x: outerRadius * cos(theta), y: outerRadius * sin(theta)))
+                }
+                
+                theta += angle
+                
+                ctx.cgContext.addLine(to: CGPoint(x: innerRadius * cos(theta), y: innerRadius * sin(theta)))
+                
+                theta += angle
             }
             
-            
-            
-            path.close()
-            
-            UIColor.yellow.setFill()
-            path.fill()
-            
-            UIColor.black.setStroke()
-            path.lineWidth = 2
-            path.stroke()
+            ctx.cgContext.closePath()
+            ctx.cgContext.setFillColor(UIColor.yellow.cgColor)
+            ctx.cgContext.fillPath()
         }
         
         imageView.image = img
