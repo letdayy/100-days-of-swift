@@ -31,11 +31,17 @@
                                 <rect key="frame" x="152" y="782" width="88" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Set Top Text" titleAlignment="automatic"/>
+                                <connections>
+                                    <action selector="setTopAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Tn-f0-K6Z"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-A3-5sx">
                                 <rect key="frame" x="287" y="768" width="90" height="63"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Set Bottom Text" subtitle="" titleAlignment="automatic"/>
+                                <connections>
+                                    <action selector="setBottomAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jrd-G2-NJU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
