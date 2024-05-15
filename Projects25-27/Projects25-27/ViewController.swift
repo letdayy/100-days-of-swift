@@ -22,8 +22,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         centerTitleButton(button: setTopButton)
         centerTitleButton(button: setBottomButton)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(importPicture))
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
     }
     
@@ -138,6 +136,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
+    }
+    
+    
+    @IBAction func importPictureBottom(_ sender: Any) {
+        importPicture()
     }
 }
 
