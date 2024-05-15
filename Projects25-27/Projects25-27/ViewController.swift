@@ -117,7 +117,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let ac = UIAlertController(title: "Add a set text", message: nil, preferredStyle: .alert)
         ac.addTextField()
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak self] _ in
-            guard let self = self, var string = ac.textFields?.first?.text else { return }
+            guard let self = self, let string = ac.textFields?.first?.text else { return }
             self.currentImage = self.setTopTitle(image: image, stringTop: string)
             self.imageView.image = self.currentImage
         }))
