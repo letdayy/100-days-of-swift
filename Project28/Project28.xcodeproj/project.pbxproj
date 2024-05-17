@@ -13,6 +13,8 @@
 		B0B701D22BF8076A00DCDC61 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B0B701D12BF8076A00DCDC61 /* Base */; };
 		B0B701D42BF8076B00DCDC61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0B701D32BF8076B00DCDC61 /* Assets.xcassets */; };
 		B0B701D72BF8076B00DCDC61 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B0B701D62BF8076B00DCDC61 /* Base */; };
+		B0B701E02BF80A8300DCDC61 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B701DE2BF80A8300DCDC61 /* KeychainItemAccessibility.swift */; };
+		B0B701E12BF80A8300DCDC61 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B701DF2BF80A8300DCDC61 /* KeychainWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		B0B701D32BF8076B00DCDC61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0B701D62BF8076B00DCDC61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0B701D82BF8076B00DCDC61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0B701DE2BF80A8300DCDC61 /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		B0B701DF2BF80A8300DCDC61 /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				B0B701D32BF8076B00DCDC61 /* Assets.xcassets */,
 				B0B701D52BF8076B00DCDC61 /* LaunchScreen.storyboard */,
 				B0B701D82BF8076B00DCDC61 /* Info.plist */,
+				B0B701DE2BF80A8300DCDC61 /* KeychainItemAccessibility.swift */,
+				B0B701DF2BF80A8300DCDC61 /* KeychainWrapper.swift */,
 			);
 			path = Project28;
 			sourceTree = "<group>";
@@ -139,8 +145,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B701CF2BF8076A00DCDC61 /* ViewController.swift in Sources */,
+				B0B701E02BF80A8300DCDC61 /* KeychainItemAccessibility.swift in Sources */,
 				B0B701CB2BF8076A00DCDC61 /* AppDelegate.swift in Sources */,
 				B0B701CD2BF8076A00DCDC61 /* SceneDelegate.swift in Sources */,
+				B0B701E12BF80A8300DCDC61 /* KeychainWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
