@@ -21,11 +21,32 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         super.viewDidLoad()
         
         title = "Selfie Share"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
+        
+        let connectionButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
+        let importPictureButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
+        //challenge 2
+        let sendTextButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(sendText))
+        
+        
+        navigationItem.rightBarButtonItems = [importPictureButton, sendTextButton]
+        navigationItem.leftBarButtonItem = connectionButton
         
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession?.delegate = self
+    }
+    
+    //challenge 2
+    @objc func sendText() {
+        let ac = UIAlertController(title: "Send your text here", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Send", style: .default) { _ in
+            if let text = ac.textFields![0].text {
+                let data = Data(text.utf8)
+                self.sendData(data)
+            }
+        })
+        present(ac, animated: true)
     }
     
     //fazer a conexão
@@ -93,17 +114,21 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         images.insert(image, at: 0)
         collectionView.reloadData()
         
+        if let imageData = image.pngData() {
+            sendText()
+        }
+    }
+    
+    func sendData(_ data: Data) {
         guard let mcSession = mcSession else { return }
         
         if mcSession.connectedPeers.count > 0 {
-            if let imageData = image.pngData() {
                 do {
-                    try mcSession.send(imageData, toPeers: mcSession.connectedPeers, with: .reliable)
+                    try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
                 } catch {
                     let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
                     present(ac, animated: true)
-                }
             }
         }
     }
@@ -134,6 +159,11 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
             if let image = UIImage(data: data) {
                 self?.images.insert(image, at: 0)
                 self?.collectionView.reloadData()
+            } else {
+                let text = String(decoding: data, as: UTF8.self)
+                let ac = UIAlertController(title: "Message received", message: "\n\(text)", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(ac, animated: true)
             }
         }
     }
