@@ -185,6 +185,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
                 self?.images.insert(image, at: 0)
                 self?.collectionView.reloadData()
             } else {
+                //challenge 2
                 let text = String(decoding: data, as: UTF8.self)
                 let ac = UIAlertController(title: "Message received", message: "\n\(text)", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
