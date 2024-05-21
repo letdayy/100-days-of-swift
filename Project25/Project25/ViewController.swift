@@ -117,7 +117,12 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
             print("Connecting: \(peerID.displayName)")
             
         case .notConnected:
-            print("Not Connected: \(peerID.displayName)")
+            //challenge 1
+            let ac = UIAlertController(title: "\(peerID.displayName) has disconnected.", message: "The connection has been interrupted.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            DispatchQueue.main.async {
+                self.present(ac, animated: true)
+            }
             
         @unknown default:
             print("Unknown state received: \(peerID.displayName)")
