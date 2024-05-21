@@ -26,10 +26,12 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         let importPictureButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
         //challenge 2
         let sendTextButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(sendText))
+        //challenge 3
+        let peerControllerButton = UIBarButtonItem(title: "Peers", style: .plain, target: self, action: #selector(peerController))
         
         
         navigationItem.rightBarButtonItems = [importPictureButton, sendTextButton]
-        navigationItem.leftBarButtonItem = connectionButton
+        navigationItem.leftBarButtonItems = [connectionButton, peerControllerButton]
         
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession?.delegate = self
@@ -46,6 +48,29 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
                 self.sendData(data)
             }
         })
+        present(ac, animated: true)
+    }
+    
+    //challenge 3
+    @objc func peerController() {
+        var peersText = ""
+        
+        var peersAvailable = false
+        if let mcSession = mcSession {
+            if mcSession.connectedPeers.count > 0 {
+                peersAvailable = true
+                for peer in mcSession.connectedPeers {
+                    peersText += "\n\(peer.displayName)"
+                }
+            }
+        }
+        
+        if !peersAvailable {
+            peersText += "No peer connected"
+        }
+        
+        let ac = UIAlertController(title: "Connected peers", message: peersText, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
     
