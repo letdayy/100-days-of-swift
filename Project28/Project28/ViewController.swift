@@ -20,6 +20,9 @@ class ViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
+        
+        //challenge 1
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(saveSecretMessage))
     }
 
     @objc func adjustForKeyboard(notification: Notification) {
@@ -70,9 +73,7 @@ class ViewController: UIViewController {
                     if sucess {
                         self?.unlockSecretMessage()
                     } else {
-                        let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified, please try again.", preferredStyle: .alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-                        self?.present(ac, animated: true)
+                        self?.passwordLogin()
                     }
                 }
             }
@@ -82,5 +83,31 @@ class ViewController: UIViewController {
             self.present(ac, animated: true)
         }
     }
+    
+    //challenge 2
+    func passwordLogin() {
+        let ac = UIAlertController(title: "Authentication failed", message: "Please, enter password", preferredStyle: .alert)
+        ac.addTextField { textField in
+            textField.isSecureTextEntry = true
+            textField.placeholder = "Password"
+        }
+        ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak ac] _ in
+            guard let passwordField = ac?.textFields?.first, let enteredPassword = passwordField.text else { return }
+            
+            if let storedPassword = KeychainWrapper.standard.string(forKey: "userPassword"), enteredPassword == storedPassword {
+                self.unlockSecretMessage()
+            } else {
+                let ac = UIAlertController(title: "Error", message: "Invalid password", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                
+                self.present(ac, animated: true)
+            }
+            
+        })
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(ac, animated: true)
+    }
 }
+
 
