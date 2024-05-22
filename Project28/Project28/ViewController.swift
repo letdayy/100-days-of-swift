@@ -20,9 +20,6 @@ class ViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
-        
-        //challenge 1
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(saveSecretMessage))
     }
 
     @objc func adjustForKeyboard(notification: Notification) {
@@ -48,6 +45,9 @@ class ViewController: UIViewController {
         title = "Secret stuff!"
         
         secret.text = KeychainWrapper.standard.string(forKey: "SecretMessage") ?? ""
+        
+        //challenge 1
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(saveSecretMessage))
     }
     
     @objc func saveSecretMessage() {
@@ -57,6 +57,9 @@ class ViewController: UIViewController {
         secret.resignFirstResponder()
         secret.isHidden = true
         title = "Nothing to see here"
+        
+        //challenge 1
+        navigationItem.rightBarButtonItem = nil
     }
 
     @IBAction func authenticateTapped(_ sender: Any) {
