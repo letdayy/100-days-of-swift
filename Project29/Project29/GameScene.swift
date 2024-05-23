@@ -38,4 +38,8 @@ class GameScene: SKScene {
             buildings.append(building)
         }
     }
+    
+    func launch(angle: Int, velocity: Int) {
+        
+    }
 }
