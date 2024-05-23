@@ -22,6 +22,9 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        angleChanged(angleSlider!)
+        velocityChanged(velocitySlider!)
+        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -55,9 +58,11 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func angleChanged(_ sender: Any) {
+        angleLabel.text = "Angle: \(Int(angleSlider.value))°"
     }
     
     @IBAction func velocityChanged(_ sender: Any) {
+        velocityLabel.text = "Velocity: \(Int(velocitySlider.value))"
     }
     
     @IBAction func launch(_ sender: Any) {
