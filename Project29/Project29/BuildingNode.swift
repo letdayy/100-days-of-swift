@@ -69,7 +69,7 @@ class BuildingNode: SKSpriteNode {
         
         let renderer = UIGraphicsImageRenderer(size: size)
         let img = renderer.image { ctx in
-            currentImage.draw(in: .zero)
+            currentImage.draw(in: CGRect(origin: .zero, size: size))
             
             ctx.cgContext.addEllipse(in: CGRect(x: convertedPoint.x - 32, y: convertedPoint.y  - 32, width: 64, height: 64))
             ctx.cgContext.setBlendMode(.clear)
