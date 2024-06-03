@@ -19,8 +19,28 @@ class GameViewController: UIViewController {
     @IBOutlet weak var launchButton: UIButton!
     @IBOutlet weak var playerNumber: UILabel!
     
+    //challenge 1
+    @IBOutlet weak var scorePlayerTwo: UILabel!
+    @IBOutlet weak var scorePlayerOne: UILabel!
+    
+    var scoreOne: Int = 0 {
+        didSet {
+            scorePlayerOne.text = "Score: \(scoreOne)"
+        }
+    }
+    
+    var scoreTwo: Int = 0 {
+        didSet {
+            scorePlayerTwo.text = "Score: \(scoreTwo)"
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //challenge 1
+        scoreOne = 0
+        scoreTwo = 0
         
         angleChanged(angleSlider!)
         velocityChanged(velocitySlider!)
@@ -91,6 +111,35 @@ class GameViewController: UIViewController {
         velocityLabel.isHidden = false
         
         launchButton.isHidden = false
+    }
+    
+    //challenge 1
+    func updateScore(player: Int) {
+        if player == 1 {
+            scoreOne += 1
+            scorePlayerOne.text = "Score: \(scoreOne)"
+            
+            if scoreOne == 3 {
+                playerWins(player: 1)
+            }
+        } else if player == 2 {
+            scoreTwo += 1
+            scorePlayerTwo.text = "Score: \(scoreTwo)"
+            
+            if scoreTwo == 3 {
+                playerWins(player: 2)
+            }
+        }
+    }
+    
+    //challenge 1
+    func playerWins(player: Int) {
+        scoreOne = 0
+        scoreTwo = 0
+        
+        let ac = UIAlertController(title: "Game Over", message: "Player \(player) Wins!", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
     
 }
