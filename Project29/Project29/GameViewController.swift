@@ -35,6 +35,12 @@ class GameViewController: UIViewController {
         }
     }
     
+    //challenge 3
+    @IBOutlet weak var windOne: UILabel!
+    @IBOutlet weak var windTwo: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,6 +68,9 @@ class GameViewController: UIViewController {
             
             view.showsFPS = true
             view.showsNodeCount = true
+            
+            //challenge 3
+            applyRandomWindy(player: 1)
         }
     }
 
@@ -100,8 +109,10 @@ class GameViewController: UIViewController {
     func activatePlayer(number: Int) {
         if number == 1 {
             playerNumber.text = "<<< PLAYER ONE"
+            applyRandomWindy(player: 1)
         } else {
             playerNumber.text = "PLAYER TWO >>>"
+            applyRandomWindy(player: 2)
         }
         
         angleSlider.isHidden = false
@@ -142,4 +153,27 @@ class GameViewController: UIViewController {
         present(ac, animated: true)
     }
     
+    //challenge 3
+    func updateCurrentPlayerWindDirectionLabel(player: Int, windDirection: String) {
+        if player == 1 {
+            windOne.text = "Wind: \(windDirection)"
+            windOne.isHidden = false
+            windTwo.isHidden = true
+        } else {
+            windTwo.text = "Wind: \(windDirection)"
+            windOne.isHidden = true
+            windTwo.isHidden = false
+        }
+    }
+    
+    //challenge 3
+    func applyRandomWindy(player: Int) {
+        let windX = CGFloat.random(in: -0.5...0.5) //número horizontal aleatório
+        let windY = CGFloat.random(in: -0.5...0.5) //número vertical aleatório
+        self.currentGame.physicsWorld.gravity = CGVector(dx: windX, dy: windY)
+        
+        let windDirection = Wind(dx: windX, dy: windY).direction
+        
+        updateCurrentPlayerWindDirectionLabel(player: player, windDirection: windDirection)
+    }
 }

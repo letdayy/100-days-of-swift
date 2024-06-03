@@ -23,6 +23,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var currentPlayer = 1
     
+    //challenge 3
+    var wind: Wind!
+    
     override func didMove(to view: SKView) {
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         
@@ -179,8 +182,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func changePlayer() {
         if currentPlayer == 1 {
             currentPlayer = 2
+            //challenge 3
+            viewController.applyRandomWindy(player: 2)
         } else {
             currentPlayer = 1
+            //challenge 3
+            viewController.applyRandomWindy(player: 1)
         }
         
         viewController.activatePlayer(number: currentPlayer)
