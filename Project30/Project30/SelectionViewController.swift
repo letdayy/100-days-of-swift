@@ -81,6 +81,7 @@ class SelectionViewController: UITableViewController {
 		cell.imageView?.layer.shadowOpacity = 1
 		cell.imageView?.layer.shadowRadius = 10
 		cell.imageView?.layer.shadowOffset = CGSize.zero
+        cell.imageView?.layer.shadowPath = UIBezierPath(ovalIn: renderRect).cgPath
 
 		// each image stores how often it's been tapped
 		let defaults = UserDefaults.standard
