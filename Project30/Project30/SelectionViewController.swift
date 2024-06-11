@@ -67,7 +67,9 @@ class SelectionViewController: UITableViewController {
 		let currentImage = items[indexPath.row % items.count]
 		let imageRootName = currentImage.replacingOccurrences(of: "Large", with: "Thumb")
         //challenge 1
-        guard let path = Bundle.main.path(forResource: imageRootName, ofType: nil) else { return <#default value#> }
+        guard let path = Bundle.main.path(forResource: imageRootName, ofType: nil) else { 
+            print("error")
+            return }
 		let original = UIImage(contentsOfFile: path)
 
         let renderRect = CGRect(origin: .zero, size: CGSize(width: 90, height: 90))

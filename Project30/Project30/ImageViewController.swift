@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageViewController: UIViewController {
-	var owner: SelectionViewController!
+	weak var owner: SelectionViewController!
 	var image: String!
 	var animTimer: Timer!
 
@@ -83,4 +83,9 @@ class ImageViewController: UIViewController {
 		// tell the parent view controller that it should refresh its table counters when we go back
 		owner.dirty = true
 	}
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        animTimer.invalidate()
+    }
 }
