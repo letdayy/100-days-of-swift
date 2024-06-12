@@ -63,14 +63,14 @@ class ViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if flippedIndices.contains(indexPath) || matchedCards.contains(indexPath) {
+        guard !flippedIndices.contains(indexPath), !matchedCards.contains(indexPath) else {
             return
         }
         
-        flippedIndices.append(indexPath)
-        
-        let cell = collectionView.cellForItem(at: indexPath) as! MemoryCell
-        cell.imageView.image = cards[indexPath.item]
+        if let cell = collectionView.cellForItem(at: indexPath) as? MemoryCell {
+            cell.flip(to: cards[indexPath.item], animated: true)
+            flippedIndices.append(indexPath)
+        }
         
         if flippedIndices.count == 2 {
             checkForMatch()
