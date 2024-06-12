@@ -41,7 +41,7 @@ class ViewController: UICollectionViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 for indexPath in self.flippedIndices {
                     if let cell = self.collectionView.cellForItem(at: indexPath) as? MemoryCell {
-                        cell.imageView.image = UIImage(named: "back")
+                        cell.imageView.image = UIImage(named: "back")?.resize(to: CGSize(width: 140, height: 140))
                     }
                 }
             }
@@ -56,7 +56,8 @@ class ViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemoryCell", for: indexPath) as! MemoryCell
-        let cardImage = matchedCards.contains(indexPath) ? cards[indexPath.item] : UIImage(named: "back")
+        cell.setupImage()
+        let cardImage = matchedCards.contains(indexPath) ? cards[indexPath.item] : UIImage(named: "back")?.resize(to: CGSize(width: 140, height: 140))
         cell.imageView.image = cardImage
         return cell
     }
