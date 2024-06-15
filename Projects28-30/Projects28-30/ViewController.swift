@@ -54,7 +54,6 @@ class ViewController: UICollectionViewController {
         collectionView.reloadItems(at: [indexPath])
         
         if selectedIndices.count == 2 {
-            //verificar se sao iguais
             let firstIndex = selectedIndices[0]
             let secondIndex = selectedIndices[1]
             let firstImageName = currentImageNames[firstIndex.item]
@@ -62,30 +61,37 @@ class ViewController: UICollectionViewController {
             
             if firstImageName == secondImageName {
                 matchedIndices.append(contentsOf: selectedIndices)
+                equalsCards(firstImageName: firstImageName, secondImageName: secondImageName)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-                    guard let self = self else { return }
-                    
-                    for index in self.selectedIndices {
-                        self.currentImageNames[index.item] = ""
-                    }
-                    
-                    self.collectionView.reloadItems(at: self.selectedIndices)
-                    self.selectedIndices.removeAll()
-                }
             } else {
-                //tratar cartas diferentes
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-                    guard let self = self else { return }
-                    
-                    for index in self.selectedIndices {
-                        self.currentImageNames[index.item] = self.backImageName
-                    }
-                    
-                    self.collectionView.reloadItems(at: self.selectedIndices)
-                    self.selectedIndices.removeAll()
-                }
+                diferentCards()
             }
+        }
+    }
+    
+    func equalsCards(firstImageName: String, secondImageName: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            
+            for index in self.selectedIndices {
+                self.currentImageNames[index.item] = ""
+            }
+            
+            self.collectionView.reloadItems(at: self.selectedIndices)
+            self.selectedIndices.removeAll()
+        }
+    }
+    
+    func diferentCards() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            
+            for index in self.selectedIndices {
+                self.currentImageNames[index.item] = self.backImageName
+            }
+            
+            self.collectionView.reloadItems(at: self.selectedIndices)
+            self.selectedIndices.removeAll()
         }
     }
 }
