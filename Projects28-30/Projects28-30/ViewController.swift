@@ -63,7 +63,17 @@ class ViewController: UICollectionViewController {
             
             if firstImageName == secondImageName {
                 matchedIndices.append(contentsOf: selectedIndices)
-                equalsCards(firstImageName: firstImageName, secondImageName: secondImageName)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    equalsCards(firstImageName: firstImageName, secondImageName: secondImageName)
+                    
+                    //se todas as cartas forem encontradas
+                    if self.matchedIndices.count == self.currentImageNames.count {
+                        self.showAlert()
+                    }
+                }
                 
             } else {
                 diferentCards()
@@ -72,21 +82,12 @@ class ViewController: UICollectionViewController {
     }
     
     func equalsCards(firstImageName: String, secondImageName: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let self = self else { return }
-            
             for index in self.selectedIndices {
                 self.currentImageNames[index.item] = ""
             }
             
             self.collectionView.reloadItems(at: self.selectedIndices)
             self.selectedIndices.removeAll()
-            
-            //se todas as cartas forem encontradas
-            if self.matchedIndices.count == self.currentImageNames.count {
-                self.newGame()
-            }
-        }
     }
     
     func diferentCards() {
@@ -99,6 +100,17 @@ class ViewController: UICollectionViewController {
             
             self.collectionView.reloadItems(at: self.selectedIndices)
             self.selectedIndices.removeAll()
+        }
+    }
+    
+    func showAlert() {
+        let ac = UIAlertController(title: "Congratulations!", message: "You finished the game", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default) {_ in
+            self.newGame()
+        })
+        
+        DispatchQueue.main.async {
+            self.present(ac, animated: true)
         }
     }
     
