@@ -13,6 +13,7 @@ class ViewController: UICollectionViewController {
     let backImageName = "back"
     let alternateImageNames = ["card1", "card2", "card3", "card4", "card1", "card2", "card3", "card4"].shuffled()
     var selectedIndices: [IndexPath] = [] //array para armazenar quantos itens foram selecionados
+    var matchedIndices: [IndexPath] = [] //array para armazenar cartas iguais
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class ViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if selectedIndices.contains(indexPath) {
+        if selectedIndices.contains(indexPath) || matchedIndices.contains(indexPath) {
             return
         }
         
@@ -53,15 +54,37 @@ class ViewController: UICollectionViewController {
         collectionView.reloadItems(at: [indexPath])
         
         if selectedIndices.count == 2 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-                guard let self = self else { return }
+            //verificar se sao iguais
+            let firstIndex = selectedIndices[0]
+            let secondIndex = selectedIndices[1]
+            let firstImageName = currentImageNames[firstIndex.item]
+            let secondImageName = currentImageNames[secondIndex.item]
+            
+            if firstImageName == secondImageName {
+                matchedIndices.append(contentsOf: selectedIndices)
                 
-                for index in self.selectedIndices {
-                    self.currentImageNames[index.item] = self.backImageName
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    for index in self.selectedIndices {
+                        self.currentImageNames[index.item] = ""
+                    }
+                    
+                    self.collectionView.reloadItems(at: self.selectedIndices)
+                    self.selectedIndices.removeAll()
                 }
-                
-                self.collectionView.reloadItems(at: self.selectedIndices)
-                self.selectedIndices.removeAll()
+            } else {
+                //tratar cartas diferentes
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    for index in self.selectedIndices {
+                        self.currentImageNames[index.item] = self.backImageName
+                    }
+                    
+                    self.collectionView.reloadItems(at: self.selectedIndices)
+                    self.selectedIndices.removeAll()
+                }
             }
         }
     }
