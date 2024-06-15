@@ -11,7 +11,7 @@ class ViewController: UICollectionViewController {
     @IBOutlet weak var imageView: UIImageView!
     var currentImageNames: [String] = []
     let backImageName = "back"
-    let alternateImageNames = ["card1", "card2", "card3", "card4", "card1", "card2", "card3", "card4"].shuffled()
+    var alternateImageNames = ["card1", "card2", "card3", "card4", "card1", "card2", "card3", "card4"].shuffled()
     var selectedIndices: [IndexPath] = [] //array para armazenar quantos itens foram selecionados
     var matchedIndices: [IndexPath] = [] //array para armazenar cartas iguais
 
@@ -20,6 +20,8 @@ class ViewController: UICollectionViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         currentImageNames = Array(repeating: backImageName, count: alternateImageNames.count)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Game", style: .plain, target: self, action: #selector(newGame))
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -79,6 +81,11 @@ class ViewController: UICollectionViewController {
             
             self.collectionView.reloadItems(at: self.selectedIndices)
             self.selectedIndices.removeAll()
+            
+            //se todas as cartas forem encontradas
+            if self.matchedIndices.count == self.currentImageNames.count {
+                self.newGame()
+            }
         }
     }
     
@@ -93,6 +100,14 @@ class ViewController: UICollectionViewController {
             self.collectionView.reloadItems(at: self.selectedIndices)
             self.selectedIndices.removeAll()
         }
+    }
+    
+    @objc func newGame() {
+        alternateImageNames.shuffle()
+        currentImageNames = Array(repeating: backImageName, count: alternateImageNames.count)
+        selectedIndices.removeAll()
+        matchedIndices.removeAll()
+        collectionView.reloadData()
     }
 }
 
