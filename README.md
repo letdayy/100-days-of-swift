@@ -22,4 +22,10 @@ Esse projeto conterá os ensinamentos e os projetos disponíveis no 100 Days of 
 | **Projeto 14** | Jogo em SpriteKit de acertar pinguins | <div align="center"><img src="assets/project14.png" width="500px" alt="Projeto 13"></div> |
 | **Projeto 15** | Utilizando animação no SpriteKit | <div align="center"><img src="assets/project15.png" width="500px" alt="Projeto 13"></div> |
 | **Projetos 13-15** | Utilizar dados JSON para retornar valores | <div align="center"><img src="assets/projects13-15a.png" width="200px" alt="Projetos 13-15a"></div> |
-| **Projeto 16** | Novo framework MapKit | <div align="center"><img src="assets/project16.png" width="200px" alt="Projeto 13"></div> |
+| **Projeto 16** | Novo framework MapKit | <div align="center"><img src="assets/project16.png" width="200px" alt="Projeto 16"></div> |
+| **Projeto 17** | Timer, linearDamping, angularDamping | <div align="center"><img src="assets/project17.png" width="500px" alt="Projeto 17"></div> |
+| **Projeto 19** | Extensões NSExtensionItem | <div align="center"><img src="assets/project19.png" width="200px" alt="Projeto 19"></div> |
+| **Projeto 20** | Jogo de selecionar e detonar grupos de fogos de artifício | <div align="center"><img src="assets/project20.png" width="500px" alt="Projeto 20"></div> |
+| **Projeto 21** | Permissão para exibir notificações | <div align="center"><img src="assets/project21.png" width="200px" alt="Projeto 21"></div> |
+| **Projeto 22** | Microlocalização utilizando iBeacon |
+| **Projeto 23** | Projecto PinguinNinja | <div align="center"><img src="assets/project23.png" width="500px" alt="Projeto 23"></div> |
