@@ -69,7 +69,7 @@ class SelectionViewController: UITableViewController {
         //challenge 1
         guard let path = Bundle.main.path(forResource: imageRootName, ofType: nil) else { 
             print("error")
-            return }
+            return UITableViewCell(style: .default, reuseIdentifier: "")}
 		let original = UIImage(contentsOfFile: path)
 
         let renderRect = CGRect(origin: .zero, size: CGSize(width: 90, height: 90))
